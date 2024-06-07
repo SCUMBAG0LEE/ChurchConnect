@@ -38,11 +38,28 @@ class Handler extends ExceptionHandler
 
     /**
      * Register the exception handling callbacks for the application.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         $this->reportable(function (Throwable $e) {
             //
         });
     }
+
+    /**
+     * Render the exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    // public function render($request, Throwable $exception)
+    // {
+    //     if($this->isHttpException($exception)) {
+    //         return response()->view('errors.404');
+    //     } else {
+    //         return response()->view('errors.500');
+    //     }
+    // }
 }
