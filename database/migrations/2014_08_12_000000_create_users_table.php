@@ -16,9 +16,9 @@ class CreateUsersTable extends Migration
         if (!Schema::hasTable('users')) {
             Schema::create('users', function (Blueprint $table) {
                 $table->id();
-                $table->string('user_id')->nullable();
-                $table->string('name')->nullable();
-                $table->string('email')->nullable();
+                $table->string('user_id')->unique();
+                $table->string('name');
+                $table->string('email')->unique();
                 $table->string('date_of_birth')->nullable();
                 $table->string('join_date')->nullable();
                 $table->string('phone_number')->nullable();
@@ -34,7 +34,6 @@ class CreateUsersTable extends Migration
             });
         }
     }
-
 
     /**
      * Reverse the migrations.
