@@ -64,12 +64,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# ChurchConnect
-whoops, nothin to see here yet, try again later!
-
-### Starting dev environment
-1. If u dont have .env file yet, make it manually by copying .env.example content into a new file named .env
-2. Run "php artisan migrate"
-3. Run "php artisan serve"
-4. Foila, happy coding
