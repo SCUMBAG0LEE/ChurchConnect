@@ -52,7 +52,7 @@ class DepartmentController extends Controller
             $query->orWhere('department_name', 'like', '%' . $searchValue . '%');
             $query->orWhere('head_of_department', 'like', '%' . $searchValue . '%');
             $query->orWhere('department_start_date', 'like', '%' . $searchValue . '%');
-            $query->orWhere('no_of_students', 'like', '%' . $searchValue . '%');
+            $query->orWhere('no_of_members', 'like', '%' . $searchValue . '%');
         })->count();
 
         $records = $departments->orderBy($columnName, $columnSortOrder)
@@ -61,7 +61,7 @@ class DepartmentController extends Controller
                 $query->orWhere('department_name', 'like', '%' . $searchValue . '%');
                 $query->orWhere('head_of_department', 'like', '%' . $searchValue . '%');
                 $query->orWhere('department_start_date', 'like', '%' . $searchValue . '%');
-                $query->orWhere('no_of_students', 'like', '%' . $searchValue . '%');
+                $query->orWhere('no_of_members', 'like', '%' . $searchValue . '%');
             })
             ->skip($start)
             ->take($rowPerPage)
@@ -88,7 +88,7 @@ class DepartmentController extends Controller
                 "department_name"       => $record->department_name,
                 "head_of_department"    => $record->head_of_department,
                 "department_start_date" => $record->department_start_date,
-                "no_of_students"        => $record->no_of_students,
+                "no_of_members"        => $record->no_of_members,
                 "modify"                => $modify,
             ];
         }
@@ -109,7 +109,7 @@ class DepartmentController extends Controller
             'department_name'       => 'required|string',
             'head_of_department'    => 'required|string',
             'department_start_date' => 'required|string',
-            'no_of_students'        => 'required|string',
+            'no_of_members'        => 'required|string',
         ]);
 
         try {
@@ -118,7 +118,7 @@ class DepartmentController extends Controller
             $saveRecord->department_name       = $request->department_name;
             $saveRecord->head_of_department    = $request->head_of_department;
             $saveRecord->department_start_date = $request->department_start_date;
-            $saveRecord->no_of_students        = $request->no_of_students;
+            $saveRecord->no_of_members        = $request->no_of_members;
             $saveRecord->save();
    
             Toastr::success('Has been add successfully :)','Success');
@@ -141,7 +141,7 @@ class DepartmentController extends Controller
                 'department_name'       => $request->department_name,
                 'head_of_department'    => $request->head_of_department,
                 'department_start_date' => $request->department_start_date,
-                'no_of_students'        => $request->no_of_students,
+                'no_of_members'        => $request->no_of_members,
             ];
 
             Department::where('department_id',$request->department_id)->update($updateRecord);

@@ -11,7 +11,7 @@
                         <span>Settings</span>
                     </a>
                 </li>
-                <li class="submenu {{set_active(['home','teacher/dashboard','student/dashboard'])}}">
+                <li class="submenu {{set_active(['home','teacher/dashboard','member/dashboard'])}}">
                     <a>
                         <i class="fas fa-tachometer-alt"></i>
                         <span> Dashboard</span> 
@@ -19,8 +19,6 @@
                     </a>
                     <ul>
                         <li><a href="{{ route('home') }}" class="{{set_active(['home'])}}">Admin Dashboard</a></li>
-                        <li><a href="{{ route('teacher/dashboard') }}" class="{{set_active(['teacher/dashboard'])}}">Teacher Dashboard</a></li>
-                        <li><a href="{{ route('student/dashboard') }}" class="{{set_active(['student/dashboard'])}}">Student Dashboard</a></li>
                     </ul>
                 </li>
                 @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
@@ -36,16 +34,16 @@
                 </li>
                 @endif
 
-                <li class="submenu {{set_active(['student/list','student/grid','student/add/page'])}} {{ (request()->is('student/edit/*')) ? 'active' : '' }} {{ (request()->is('student/profile/*')) ? 'active' : '' }}">
+                <li class="submenu {{set_active(['member/list','member/grid','member/add/page'])}} {{ (request()->is('member/edit/*')) ? 'active' : '' }} {{ (request()->is('member/profile/*')) ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-graduation-cap"></i>
-                        <span> Students</span>
+                        <span> Memberss</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="{{ route('student/list') }}"  class="{{set_active(['student/list','student/grid'])}}">Student List</a></li>
-                        <li><a href="{{ route('student/add/page') }}" class="{{set_active(['student/add/page'])}}">Student Add</a></li>
-                        <li><a class="{{ (request()->is('student/edit/*')) ? 'active' : '' }}">Student Edit</a></li>
-                        <li><a href=""  class="{{ (request()->is('student/profile/*')) ? 'active' : '' }}">Student View</a></li>
+                        <li><a href="{{ route('member/list') }}"  class="{{set_active(['member/list','member/grid'])}}">Member List</a></li>
+                        <li><a href="{{ route('member/add/page') }}" class="{{set_active(['member/add/page'])}}">Member Add</a></li>
+                        <li><a class="{{ (request()->is('member/edit/*')) ? 'active' : '' }}">Member Edit</a></li>
+                        <li><a href=""  class="{{ (request()->is('member/profile/*')) ? 'active' : '' }}">Member View</a></li>
                     </ul>
                 </li>
 

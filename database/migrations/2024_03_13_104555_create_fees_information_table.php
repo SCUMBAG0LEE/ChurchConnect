@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('fees_information', function (Blueprint $table) {
             $table->id();
-            $table->string('student_id')->nullable();
-            $table->string('student_name')->nullable();
+            $table->string('member_id')->nullable();
+            $table->string('member_name')->nullable();
             $table->string('gender')->nullable();
             $table->string('fees_type')->nullable();
             $table->string('fees_amount')->nullable();

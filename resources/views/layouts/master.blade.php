@@ -26,8 +26,8 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="{{ route('home') }}" class="logo">
-                    <img src="{{ URL::to('assets/img/logo.png') }}" alt="Logo">
+                <a href="{{ url('http://127.0.0.1:8000/') }}" class="logo">
+                    <img src="{{ URL::to('assets/img/logo-b.png') }}" alt="Logo">
                 </a>
                 <a href="{{ route('home') }}" class="logo logo-small">
                     <img src="{{ URL::to('assets/img/logo-small.png') }}" alt="Logo" width="30" height="30">
@@ -181,7 +181,7 @@
 		{{-- content page --}}
         @yield('content')
         <footer>
-            <p>Copyright ©  <?php echo date('Y'); ?> Soeng Souy.</p>
+            <p>Copyright ©  <?php echo date('Y'); ?> BackEnd Programming.</p>
         </footer>
     
     </div>

@@ -25,11 +25,11 @@
                     <div class="card-body">
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
-                                <h6>Students</h6>
-                                <h3>50055</h3>
+                                <h6>Members</h6>
+                                <h3>12345</h3>
                             </div>
                             <div class="db-icon">
-                                <img src="{{ URL::to('assets/img/icons/dash-icon-01.svg') }}" alt="Dashboard Icon">
+                                <img src="{{ URL::to('assets/img/icons/dash-icon-01.png') }}" alt="Dashboard Icon">
                             </div>
                         </div>
                     </div>
@@ -40,11 +40,11 @@
                     <div class="card-body">
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
-                                <h6>Awards</h6>
-                                <h3>50+</h3>
+                                <h6>Events</h6>
+                                <h3>10</h3>
                             </div>
                             <div class="db-icon">
-                                <img src="{{ URL::to('assets/img/icons/dash-icon-02.svg') }}" alt="Dashboard Icon">
+                                <img src="{{ URL::to('assets/img/icons/dash-icon-02.png') }}" alt="Dashboard Icon">
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="card-body">
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
-                                <h6>Department</h6>
+                                <h6>Church Branch</h6>
                                 <h3>30+</h3>
                             </div>
                             <div class="db-icon">
@@ -70,7 +70,7 @@
                     <div class="card-body">
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
-                                <h6>Revenue</h6>
+                                <h6>Donations</h6>
                                 <h3>$505</h3>
                             </div>
                             <div class="db-icon">
@@ -93,8 +93,8 @@
                             </div>
                             <div class="col-6">
                                 <ul class="chart-list-out">
-                                    <li><span class="circle-blue"></span>Teacher</li>
-                                    <li><span class="circle-green"></span>Student</li>
+                                    <li><span class="circle-blue"></span>Workers</li>
+                                    <li><span class="circle-green"></span>Members</li>
                                     <li class="star-menus"><a href="javascript:;"><i
                                                 class="fas fa-ellipsis-v"></i></a></li>
                                 </ul>
@@ -113,12 +113,12 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-6">
-                                <h5 class="card-title">Number of Students</h5>
+                                <h5 class="card-title">Number of Members</h5>
                             </div>
                             <div class="col-6">
                                 <ul class="chart-list-out">
-                                    <li><span class="circle-blue"></span>Girls</li>
-                                    <li><span class="circle-green"></span>Boys</li>
+                                    <li><span class="circle-blue"></span>Female</li>
+                                    <li><span class="circle-green"></span>Male</li>
                                     <li class="star-menus"><a href="javascript:;"><i
                                                 class="fas fa-ellipsis-v"></i></a></li>
                                 </ul>
@@ -135,116 +135,116 @@
         <div class="row">
             <div class="col-xl-6 d-flex">
 
-                <div class="card flex-fill student-space comman-shadow">
-                    <div class="card-header d-flex align-items-center">
-                        <h5 class="card-title">Star Students</h5>
-                        <ul class="chart-list-out student-ellips">
-                            <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table
-                                class="table star-student table-hover table-center table-borderless table-striped">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th class="text-center">Marks</th>
-                                        <th class="text-center">Percentage</th>
-                                        <th class="text-end">Year</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>PRE2209</div>
-                                        </td>
-                                        <td class="text-nowrap">
-                                            <a href="profile.html">
-                                                <img class="rounded-circle"src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Star Students"> Soeng Souy
-                                            </a>
-                                        </td>
-                                        <td class="text-center">1185</td>
-                                        <td class="text-center">98%</td>
-                                        <td class="text-end">
-                                            <div>2019</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>PRE1245</div>
-                                        </td>
-                                        <td class="text-nowrap">
-                                            <a href="profile.html">
-                                                <img class="rounded-circle"src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Star Students"> Soeng Souy
-                                            </a>
-                                        </td>
-                                        <td class="text-center">1195</td>
-                                        <td class="text-center">99.5%</td>
-                                        <td class="text-end">
-                                            <div>2018</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>PRE1625</div>
-                                        </td>
-                                        <td class="text-nowrap">
-                                            <a href="profile.html">
-                                                <img class="rounded-circle"src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Star Students"> Soeng Souy
-                                            </a>
-                                        </td>
-                                        <td class="text-center">1196</td>
-                                        <td class="text-center">99.6%</td>
-                                        <td class="text-end">
-                                            <div>2017</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>PRE2516</div>
-                                        </td>
-                                        <td class="text-nowrap">
-                                            <a href="profile.html">
-                                                <img class="rounded-circle"src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Star Students"> Soeng Souy
-                                            </a>
-                                        </td>
-                                        <td class="text-center">1187</td>
-                                        <td class="text-center">98.2%</td>
-                                        <td class="text-end">
-                                            <div>2016</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>PRE2209</div>
-                                        </td>
-                                        <td class="text-nowrap">
-                                            <a href="profile.html">
-                                                <img class="rounded-circle"src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Star Students"> Soeng Souy
-                                            </a>
-                                        </td>
-                                        <td class="text-center">1185</td>
-                                        <td class="text-center">98%</td>
-                                        <td class="text-end">
-                                            <div>2015</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            <div class="card flex-fill member-space comman-shadow">
+    <div class="card-header d-flex align-items-center">
+        <h5 class="card-title">Top Donations</h5>
+        <ul class="chart-list-out member-ellips">
+            <li class="star-menus">
+                <a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table star-member table-hover table-center table-borderless table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th class="text-center">Donation Amount</th>
+                        <th class="text-center">Percentage of Total</th>
+                        <th class="text-end">Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-nowrap">
+                            <div>DON2209</div>
+                        </td>
+                        <td class="text-nowrap">
+                            <a href="profile.html">
+                                <img class="rounded-circle" src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Donor"> John Doe
+                            </a>
+                        </td>
+                        <td class="text-center">$1185</td>
+                        <td class="text-center">15%</td>
+                        <td class="text-end">
+                            <div>2019</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-nowrap">
+                            <div>DON1245</div>
+                        </td>
+                        <td class="text-nowrap">
+                            <a href="profile.html">
+                                <img class="rounded-circle" src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Donor"> Jane Smith
+                            </a>
+                        </td>
+                        <td class="text-center">$1195</td>
+                        <td class="text-center">20%</td>
+                        <td class="text-end">
+                            <div>2018</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-nowrap">
+                            <div>DON1625</div>
+                        </td>
+                        <td class="text-nowrap">
+                            <a href="profile.html">
+                                <img class="rounded-circle" src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Donor"> Robert Brown
+                            </a>
+                        </td>
+                        <td class="text-center">$1196</td>
+                        <td class="text-center">22%</td>
+                        <td class="text-end">
+                            <div>2017</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-nowrap">
+                            <div>DON2516</div>
+                        </td>
+                        <td class="text-nowrap">
+                            <a href="profile.html">
+                                <img class="rounded-circle" src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Donor"> Emily Davis
+                            </a>
+                        </td>
+                        <td class="text-center">$1187</td>
+                        <td class="text-center">18%</td>
+                        <td class="text-end">
+                            <div>2016</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-nowrap">
+                            <div>DON2209</div>
+                        </td>
+                        <td class="text-nowrap">
+                            <a href="profile.html">
+                                <img class="rounded-circle" src="{{ URL::to('assets/img/profiles/avatar-01.jpg') }}" width="25" alt="Donor"> Michael Lee
+                            </a>
+                        </td>
+                        <td class="text-center">$1185</td>
+                        <td class="text-center">15%</td>
+                        <td class="text-end">
+                            <div>2015</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
             </div>
             <div class="col-xl-6 d-flex">
 
                 <div class="card flex-fill comman-shadow">
                     <div class="card-header d-flex align-items-center">
-                        <h5 class="card-title ">Student Activity </h5>
-                        <ul class="chart-list-out student-ellips">
+                        <h5 class="card-title ">Church Activities </h5>
+                        <ul class="chart-list-out member-ellips">
                             <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a>
                             </li>
                         </ul>
@@ -256,8 +256,8 @@
                                     <img src="assets/img/icons/award-icon-01.svg" alt="Award">
                                 </div>
                                 <div class="award-list-outs">
-                                    <h4>1st place in "Chess”</h4>
-                                    <h5>John Doe won 1st place in "Chess"</h5>
+                                    <h4>Organized Charity Event”</h4>
+                                    <h5>Mary Johnson organized a charity event"</h5>
                                 </div>
                                 <div class="award-time-list">
                                     <span>1 Day ago</span>
@@ -268,8 +268,8 @@
                                     <img src="assets/img/icons/award-icon-02.svg" alt="Award">
                                 </div>
                                 <div class="award-list-outs">
-                                    <h4>Participated in "Carrom"</h4>
-                                    <h5>Justin Lee participated in "Carrom"</h5>
+                                    <h4>Participated in Community Outreach</h4>
+                                    <h5>Michael Smith participated in community outreach</h5>
                                 </div>
                                 <div class="award-time-list">
                                     <span>2 hours ago</span>
@@ -280,9 +280,9 @@
                                     <img src="assets/img/icons/award-icon-03.svg" alt="Award">
                                 </div>
                                 <div class="award-list-outs">
-                                    <h4>Internation conference in "St.John School"</h4>
-                                    <h5>Justin Leeattended internation conference in "St.John School"</h5>
-                                </div>
+                                    <h4>Attended Church Conference</h4>
+                                    <h5>Sarah Lee attended a church conference</h5>
+                                    </div>
                                 <div class="award-time-list">
                                     <span>2 Week ago</span>
                                 </div>
@@ -292,8 +292,8 @@
                                     <img src="assets/img/icons/award-icon-04.svg" alt="Award">
                                 </div>
                                 <div class="award-list-outs">
-                                    <h4>Won 1st place in "Chess"</h4>
-                                    <h5>John Doe won 1st place in "Chess"</h5>
+                                    <h4>Won Volunteer of the Year</h4>
+                                    <h5>John Doe won Volunteer of the Year</h5>
                                 </div>
                                 <div class="award-time-list">
                                     <span>3 Day ago</span>

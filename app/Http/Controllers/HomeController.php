@@ -39,9 +39,9 @@ class HomeController extends Controller
         return view('dashboard.teacher_dashboard');
     }
 
-    /** student dashboard */
-    public function studentDashboardIndex()
+    /** member dashboard */
+    public function memberDashboardIndex()
     {
-        return view('dashboard.student_dashboard');
+        return view('dashboard.member_dashboard');
     }
 }

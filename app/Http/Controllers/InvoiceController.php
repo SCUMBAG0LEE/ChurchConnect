@@ -72,7 +72,7 @@ class InvoiceController extends Controller
     /** invoice add page */
     public function invoiceAdd()
     {
-        $users = User::whereIn('role_name',['Student','Client'])->get();
+        $users = User::whereIn('role_name',['Member','Client'])->get();
         return view('invoices.invoice_add',compact('users'));
     }
 
@@ -176,7 +176,7 @@ class InvoiceController extends Controller
         } catch(\Exception $e) {
             DB::rollback();
             \Log::info($e);
-            Toastr::error('fail, Add new student  :)','Error');
+            Toastr::error('fail, Add new member  :)','Error');
             return redirect()->back();
         }
     }

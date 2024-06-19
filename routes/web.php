@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\Setting;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\SubjectController;
@@ -73,7 +73,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('/home', 'index')->middleware('auth')->name('home');
         Route::get('user/profile/page', 'userProfile')->middleware('auth')->name('user/profile/page');
         Route::get('teacher/dashboard', 'teacherDashboardIndex')->middleware('auth')->name('teacher/dashboard');
-        Route::get('student/dashboard', 'studentDashboardIndex')->middleware('auth')->name('student/dashboard');
+        Route::get('member/dashboard', 'memberDashboardIndex')->middleware('auth')->name('member/dashboard');
     });
 
     // ----------------------------- user controller ---------------------//
@@ -91,16 +91,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('setting/page', 'index')->middleware('auth')->name('setting/page');
     });
 
-    // ------------------------ student -------------------------------//
-    Route::controller(StudentController::class)->group(function () {
-        Route::get('student/list', 'student')->middleware('auth')->name('student/list'); // list student
-        Route::get('student/grid', 'studentGrid')->middleware('auth')->name('student/grid'); // grid student
-        Route::get('student/add/page', 'studentAdd')->middleware('auth')->name('student/add/page'); // page student
-        Route::post('student/add/save', 'studentSave')->name('student/add/save'); // save record student
-        Route::get('student/edit/{id}', 'studentEdit'); // view for edit
-        Route::post('student/update', 'studentUpdate')->name('student/update'); // update record student
-        Route::post('student/delete', 'studentDelete')->name('student/delete'); // delete record student
-        Route::get('student/profile/{id}', 'studentProfile')->middleware('auth'); // profile student
+    // ------------------------ member -------------------------------//
+    Route::controller(MemberController::class)->group(function () {
+        Route::get('member/list', 'member')->middleware('auth')->name('member/list'); // list member
+        Route::get('member/grid', 'memberGrid')->middleware('auth')->name('member/grid'); // grid member
+        Route::get('member/add/page', 'memberAdd')->middleware('auth')->name('member/add/page'); // page member
+        Route::post('member/add/save', 'memberSave')->name('member/add/save'); // save record member
+        Route::get('member/edit/{id}', 'memberEdit'); // view for edit
+        Route::post('member/update', 'memberUpdate')->name('member/update'); // update record member
+        Route::post('member/delete', 'memberDelete')->name('member/delete'); // delete record member
+        Route::get('member/profile/{id}', 'memberProfile')->middleware('auth')->name('member/profile'); // profile member
     });
 
     // ------------------------ teacher -------------------------------//

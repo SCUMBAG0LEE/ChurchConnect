@@ -9,8 +9,8 @@ class FeesInformation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'student_id',
-        'student_name',
+        'member_id',
+        'member_name',
         'gender',
         'fees_type',
         'fees_amount',
