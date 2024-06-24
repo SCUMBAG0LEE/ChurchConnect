@@ -11,7 +11,10 @@
                         <span>Settings</span>
                     </a>
                 </li>
+<<<<<<< HEAD
                 @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
+=======
+>>>>>>> Worship-schedule
                 <li class="submenu {{set_active(['home','teacher/dashboard','member/dashboard'])}}">
                     <a>
                         <i class="fas fa-tachometer-alt"></i>
@@ -22,7 +25,10 @@
                         <li><a href="{{ route('home') }}" class="{{set_active(['home'])}}">Admin Dashboard</a></li>
                     </ul>
                 </li>
+<<<<<<< HEAD
                 @endif
+=======
+>>>>>>> Worship-schedule
                 @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                 <li class="submenu {{set_active(['list/users'])}} {{ (request()->is('view/user/edit/*')) ? 'active' : '' }}">
                     <a href="#">
@@ -43,10 +49,15 @@
                     </a>
                     <ul>
                         <li><a href="{{ route('member/list') }}"  class="{{set_active(['member/list','member/grid'])}}">Member List</a></li>
+<<<<<<< HEAD
                         @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                         <li><a href="{{ route('member/add/page') }}" class="{{set_active(['member/add/page'])}}">Member Add</a></li>
                         <li><a class="{{ (request()->is('member/edit/*')) ? 'active' : '' }}">Member Edit</a></li>
                         @endif
+=======
+                        <li><a href="{{ route('member/add/page') }}" class="{{set_active(['member/add/page'])}}">Member Add</a></li>
+                        <li><a class="{{ (request()->is('member/edit/*')) ? 'active' : '' }}">Member Edit</a></li>
+>>>>>>> Worship-schedule
                         <li><a href=""  class="{{ (request()->is('member/profile/*')) ? 'active' : '' }}">Member View</a></li>
                     </ul>
                 </li>
@@ -60,10 +71,15 @@
                     </a>
                     <ul>
                         <li><a href="{{ route('branch/list/page') }}" class="{{set_active(['branch/list/page'])}} {{ request()->is('branch/edit/*') ? 'active' : '' }}">Branch List</a></li>
+<<<<<<< HEAD
                         @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                         <li><a href="{{ route('branch/add/page') }}" class="{{set_active(['branch/add/page'])}}">Branch Add</a></li>
                         <li><a>Branch Edit</a></li>
                         @endif
+=======
+                        <li><a href="{{ route('branch/add/page') }}" class="{{set_active(['branch/add/page'])}}">Branch Add</a></li>
+                        <li><a>Branch Edit</a></li>
+>>>>>>> Worship-schedule
                     </ul>
                 </li>
 
@@ -99,10 +115,15 @@
                     <ul>
                         <!--For Worship page-->
                         <li><a href="{{ route('worship/list') }}" class="{{ set_active(['worship/list']) }}">Worship List</a></li>
+<<<<<<< HEAD
                         @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                         <li><a href="{{ route('worship/add/page') }}" class="{{ set_active(['worship/add/page']) }}">Worship Add</a></li>
                         <li><a>Worship Edit</a></li>
                         @endif
+=======
+                        <li><a href="{{ route('worship/add/page') }}" class="{{ set_active(['worship/add/page']) }}">Worship Add</a></li>
+                        <li><a>Worship Edit</a></li>
+>>>>>>> Worship-schedule
                     </ul>
                 </li>
                 <li>
@@ -111,4 +132,8 @@
             </ul>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> Worship-schedule
