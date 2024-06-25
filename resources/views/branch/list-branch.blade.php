@@ -55,9 +55,11 @@
                                     <a href="#" class="btn btn-outline-primary me-2">
                                         <i class="fas fa-download"></i> Download
                                     </a>
+                                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                                     <a href="{{ route('branch/add/page') }}" class="btn btn-primary">
                                         <i class="fas fa-plus"></i>
                                     </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
