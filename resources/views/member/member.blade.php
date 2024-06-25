@@ -103,7 +103,7 @@
                                             <h2 class="table-avatar">
                                             <a href="{{ route('member/profile', ['id' => $list->id]) }}" class="avatar avatar-sm me-2">
                                                 @if($list->upload && Storage::exists('public/member-photos/' . $list->upload))
-                                                    <img class="avatar-img rounded-circle" src="{{ Storage::url('member-photos/'.$list->upload) }}" alt="User Image">
+                                                    <img class="avatar-img rounded-circle" src="{{ Storage::url('public/member-photos/'.$list->upload) }}" alt="User Image">
                                                 @else
                                                     <img class="avatar-img rounded-circle" src="{{ URL::to('/images/photo_defaults.jpg') }}" alt="Default Image">
                                                 @endif
