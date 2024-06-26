@@ -31,6 +31,7 @@ class BranchController extends Controller
     /** get data list */
     public function getDataList(Request $request)
     {
+        $roleName        = $request->role_name;
         $draw            = $request->get('draw');
         $start           = $request->get("start");
         $rowPerPage      = $request->get("length"); // total number of rows per page
@@ -70,6 +71,8 @@ class BranchController extends Controller
         
         foreach ($records as $key => $record) {
 
+            if ($roleName === 'Admin' || $roleName === 'Super Admin')
+            {
             $modify = '
                 <td class="text-end"> 
                     <div class="actions">
@@ -82,6 +85,19 @@ class BranchController extends Controller
                     </div>
                 </td>
             ';
+            }
+            else
+            {
+                $modify = '
+                <td class="text-end"> 
+                    <div class="actions">
+                        <a class="btn btn-sm bg-danger-light delete branch_id" data-bs-toggle="modal" data-branch_id="'.$record->id.'" data-bs-target="#delete">
+                        <i class="fe fe-trash-2"></i>
+                        </a>
+                    </div>
+                </td>
+            ';
+            }
 
             $data_arr [] = [
                 "branch_id"         => $record->branch_id,
