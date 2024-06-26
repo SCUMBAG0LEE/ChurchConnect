@@ -32,6 +32,7 @@
                     </a>
                     <ul>
                         <li><a href="{{ route('list/users') }}" class="{{set_active(['list/users'])}} {{ (request()->is('view/user/edit/*')) ? 'active' : '' }}">List Users</a></li>
+                        <li><a href="/register">Create Account</a></li>
                     </ul>
                 </li>
                 @endif
