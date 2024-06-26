@@ -19,6 +19,6 @@ class WorshipSummary extends Model
 
     public function WorshipSummary()
     {
-        return $this->belongsTo(WorshipSummary::class);
+        return $this->belongsTo(Worship::class);
     }
 }
