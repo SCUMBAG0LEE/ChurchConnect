@@ -118,6 +118,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
         Route::post('member/update', 'memberUpdate')->name('member/update'); // update record member
         Route::post('member/delete', 'memberDelete')->name('member/delete'); // delete record member
         Route::get('member/profile/{id}', 'memberProfile')->middleware('auth')->name('member/profile'); // profile member
+        Route::get('member/search', 'search')->name('member/search');
     });
 
 
