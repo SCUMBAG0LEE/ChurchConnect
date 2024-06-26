@@ -43,6 +43,21 @@ Route::prefix('/')->group(function () {
     Route::view('contact', 'landingpage.contact');
 });
 
+Route::post('send-mail', function (\Illuminate\Http\Request $request) {
+    $details = [
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'phone' => $request->input('phone'),
+        'message' => $request->input('message'),
+    ];
+
+    try {
+        \Mail::to('darkpaladincreeper@gmail.com')->send(new \App\Mail\SendMail($details));
+        return redirect()->back()->with('status', 'success')->with('message', 'Email sent successfully.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('status', 'error')->with('message', 'Failed to send email. Please try again later.');
+    }
+});
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('home', function() {
@@ -103,6 +118,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
         Route::post('member/update', 'memberUpdate')->name('member/update'); // update record member
         Route::post('member/delete', 'memberDelete')->name('member/delete'); // delete record member
         Route::get('member/profile/{id}', 'memberProfile')->middleware('auth')->name('member/profile'); // profile member
+        Route::get('member/search', 'search')->name('member/search');
     });
 
 
