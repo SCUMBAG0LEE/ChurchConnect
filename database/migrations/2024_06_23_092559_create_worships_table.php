@@ -18,6 +18,7 @@ class CreateWorshipsTable extends Migration
             $table->id();
             $table->date('date');
             $table->string('title');
+            $table->text('note')->nullable(); // Added 'note' column
             $table->timestamps();
         });
 

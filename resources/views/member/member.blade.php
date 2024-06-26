@@ -103,7 +103,7 @@
                                             <h2 class="table-avatar">
                                             <a href="{{ route('member/profile', ['id' => $list->id]) }}" class="avatar avatar-sm me-2">
                                                 @if($list->upload && Storage::exists('public/member-photos/' . $list->upload))
-                                                <img class="avatar-img rounded-circle" src="{{ Storage::url('public/member-photos/' . $list->upload) }}" alt="User Image">
+                                                    <img class="avatar-img rounded-circle" src="{{ Storage::url('member-photos/'.$list->upload) }}" alt="User Image">
                                                 @else
                                                     <img class="avatar-img rounded-circle" src="{{ URL::to('/images/photo_defaults.jpg') }}" alt="Default Image">
                                                 @endif
@@ -120,11 +120,9 @@
                                             <td>{{ $list->cell }}</td> 
                                             <td class="text-end">
                                                 <div class="actions">
-                                                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                                                     <a href="{{ url('member/edit/'.$list->id) }}" class="btn btn-sm bg-danger-light">
                                                         <i class="far fa-edit me-2"></i>
                                                     </a>
-                                                    @endif
                                                     <a class="btn btn-sm bg-danger-light member_delete" data-bs-toggle="modal" data-bs-target="#memberUser">
                                                         <i class="far fa-trash-alt me-2"></i>
                                                     </a>

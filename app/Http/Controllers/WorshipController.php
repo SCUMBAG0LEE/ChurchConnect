@@ -61,48 +61,5 @@ class WorshipController extends Controller
 
         return response()->json(['error' => 'Worship not found'], 404);
     }
-
-    public function edit($id)
-    {
-        $worship = Worship::with('members')->findOrFail($id);
-        $members = Member::all();
-
-        return view('worship.edit-worship', compact('worship', 'members'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'date' => 'required|date',
-            'title' => 'required|string|max:255',
-            'note' => 'nullable|string',
-            'positions' => 'required|array',
-        ]);
-
-        $worship = Worship::findOrFail($id);
-        $worship->date = $request->date;
-        $worship->title = $request->title;
-        $worship->note = $request->note; // Save the note
-        $worship->save();
-
-        $syncData = [];
-        foreach ($request->positions as $memberId => $position) {
-            $syncData[$memberId] = [
-                'position' => $position,
-            ];
-        }
-
-        $worship->members()->sync($syncData);
-
-        return redirect()->route('worship/list')->with('success', 'Worship schedule updated successfully.');
-    }
-
-    public function destroy($id)
-    {
-        $worship = Worship::findOrFail($id);
-        $worship->members()->detach();
-        $worship->delete();
-
-        return response()->json(['success' => 'Worship schedule deleted successfully.']);
-    }
 }
+
