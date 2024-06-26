@@ -118,17 +118,19 @@
 </div>
 
 @section('script')
-    {{-- get data all js --}}
     <script type="text/javascript">
         $(document).ready(function() {
-        $('#dataList').DataTable({
+            $('#dataList').DataTable({
                 processing: true,
                 serverSide: true,
                 ordering: true,
                 searching: true,
                 ajax: {
-                    url:"{{ route('get-data-list') }}",
-                    type: 'GET'
+                    url: "{{ route('get-data-list') }}",
+                    type: 'GET',
+                    data: function(d) {
+                        d.role_name = "{{ Session::get('role_name') }}"; // Pass role_name here
+                    }
                 },
                 columns: [
                     {
@@ -173,14 +175,5 @@
             });
         });
     </script>
-
-    {{-- delete js --}}
-<script>
-    $(document).on('click','.delete',function()
-    {
-        var _this = $(this).parents('tr');
-        $('.e_branch_id').val(_this.find('.branch_id').data('branch_id'));
-    });
-</script>
 @endsection
 @endsection
