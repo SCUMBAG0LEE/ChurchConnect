@@ -180,7 +180,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group members-up-files">
                                             <label>Upload Member Photo (150px X 150px)</label>
-                                            <div class="uplod">
+                                            <div class="upload">
                                                 <label class="file-upload image-upbtn mb-0 @error('upload') is-invalid @enderror">
                                                     Choose File <input type="file" name="upload">
                                                 </label>

@@ -6,23 +6,24 @@
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ml-auto">
-                     <li class="nav-item active">
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/') }}">Home</a>
-                     </li>
-                     <li class="nav-item">
+                    </li>
+                    <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/about') }}">About</a>
-                     </li>
-                     <li class="nav-item">
+                    </li>
+                    <li class="nav-item {{ Request::is('sermon') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/sermon') }}">Sermons</a>
-                     </li>
-                     <li class="nav-item">
+                    </li>
+                    <li class="nav-item {{ Request::is('blog') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
-                     </li>
-                     <li class="nav-item">
+                    </li>
+                    <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
-                     </li>
-                  </ul>
+                    </li>
+                </ul>
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>

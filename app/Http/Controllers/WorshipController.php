@@ -19,45 +19,47 @@ class WorshipController extends Controller
         $request->validate([
             'date' => 'required|date',
             'title' => 'required|string|max:255',
-            'positions' => 'required|array', // Changed 'roles' to 'positions'
+            'note' => 'nullable|string',
+            'positions' => 'required|array',
         ]);
 
         $worship = new Worship();
         $worship->date = $request->date;
         $worship->title = $request->title;
+        $worship->note = $request->note; // Save the note
         $worship->save();
 
         $syncData = [];
         foreach ($request->positions as $memberId => $position) {
             $syncData[$memberId] = [
-                'position' => $position, // Adjusted to 'position'
+                'position' => $position,
             ];
         }
 
-        $worship->members()->attach($syncData); // Changed sync to attach for creating new entries
+        $worship->members()->attach($syncData);
 
         return redirect()->route('worship/add/page')->with('success', 'Worship schedule added successfully.');
     }
 
     public function listPage()
     {
-        $worships = Worship::orderBy('date', 'desc')->get(); // Assuming 'date' is a column in your Worship model
+        $worships = Worship::orderBy('date', 'desc')->get();
         return view('worship.worship', compact('worships'));
     }
 
     public function getDetails($id)
-{
-    $worship = Worship::with('members')->find($id);
+    {
+        $worship = Worship::with('members')->find($id);
 
-    if ($worship) {
-        $worship->members->each(function ($member) {
-            $member->name = $member->first_name . ' ' . $member->last_name;
-        });
+        if ($worship) {
+            $worship->members->each(function ($member) {
+                $member->name = $member->first_name . ' ' . $member->last_name;
+            });
 
-        return response()->json($worship);
+            return response()->json($worship);
+        }
+
+        return response()->json(['error' => 'Worship not found'], 404);
     }
-
-    return response()->json(['error' => 'Worship not found'], 404);
 }
 
-}

@@ -55,6 +55,7 @@
                             <h5 class="form-title member-info">Worship Information</h5>
                             <p><strong>Date:</strong> ${data.date}</p>
                             <p><strong>Title:</strong> ${data.title}</p>
+                            <p><strong>Note:</strong> ${data.note}</p>
                             <h5 class="form-title member-info">Workers</h5>
                             <table class="table table-bordered mt-3">
                                 <thead>
