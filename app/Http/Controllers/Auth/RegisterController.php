@@ -19,6 +19,7 @@ class RegisterController extends Controller
         $role = DB::table('role_type_users')->get();
         return view('auth.register',compact('role'));
     }
+    
     public function storeUser(Request $request)
     {
         $request->validate([
@@ -31,15 +32,28 @@ class RegisterController extends Controller
 
         $dt       = Carbon::now();
         $todayDate = $dt->toDayDateTimeString();
+        $defaultImagePath = public_path('images/photo_defaults.jpg');
         
-        User::create([
+        $user = User::create([
             'name'      => $request->name,
-            'avatar'    => $request->image,
+            'avatar'    => $defaultImagePath,
             'email'     => $request->email,
             'join_date' => $todayDate,
             'role_name' => $request->role_name,
             'password'  => Hash::make($request->password),
         ]);
+
+        $userImagePath = public_path('images\\user_pfp\\' . $user->id . '.jpg');
+
+        // Copy the default image to the new path
+        copy($defaultImagePath, $userImagePath);
+
+        $folderPosition = strpos($userImagePath, 'images\\');
+
+        $relativePath = substr($userImagePath, $folderPosition + strlen('images\\'));
+
+        $user->update(['avatar' => $relativePath]);
+
         Toastr::success('Create new account successfully :)','Success');
         return redirect()->route('login');
     }

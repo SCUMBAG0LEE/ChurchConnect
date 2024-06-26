@@ -14,17 +14,17 @@ class AccountsController extends Controller
     public function index()
     {
         $feesInformation = FeesInformation::join('users', 'fees_information.member_id', 'users.id')
-            ->select('fees_information.*', 'users.avatar')
+            ->select('fees_information.*','users.avatar')
             ->get();
-        return view('accounts.feescollections', compact('feesInformation'));
+        return view('accounts.feescollections',compact('feesInformation'));
     }
 
     /** add Fees Collection */
     public function addFeesCollection()
     {
-        $users    = User::whereIn('role_name', ['Member'])->get();
+        $users    = User::whereIn('role_name',['Member'])->get();
         $feesType = FeesType::all();
-        return view('accounts.add-fees-collection', compact('users', 'feesType'));
+        return view('accounts.add-fees-collection',compact('users','feesType'));
     }
 
     /** save record */
@@ -49,13 +49,13 @@ class AccountsController extends Controller
             $saveRecord->fees_amount  = $request->fees_amount;
             $saveRecord->paid_date    = $request->paid_date;
             $saveRecord->save();
-
-            Toastr::success('Has been add successfully :)', 'Success');
+   
+            Toastr::success('Has been add successfully :)','Success');
             return redirect()->back();
-        } catch (\Exception $e) {
+        } catch(\Exception $e) {
             \Log::info($e);
             DB::rollback();
-            Toastr::error('fail, Add new record  :)', 'Error');
+            Toastr::error('fail, Add new record  :)','Error');
             return redirect()->back();
         }
     }

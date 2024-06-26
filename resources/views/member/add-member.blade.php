@@ -121,9 +121,9 @@
 
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
-                                            <label>Church Branch <span class="login-danger">*</span></label>  <!-- Ganti Branch dengan alamat branch gereja -->
+                                            <label>Church Branch <span class="login-danger">*</span></label>  <!-- Ganti branch dengan alamat branch gereja -->
                                             <select class="form-control select @error('church_branch') is-invalid @enderror" name="church_branch">
-                                                <option selected disabled>Please Select Branch </option>
+                                                <option selected disabled>Please Select branch </option>
                                                 <option value="Branch 1" {{ old('church_branch') == 'Branch 1' ? "selected" :""}}>Branch 1</option>
                                                 <option value="Branch 2" {{ old('church_branch') == 'Branch 2' ? "selected" :""}}>Branch 2</option>
                                                 <option value="Branch 3" {{ old('church_branch') == 'Branch 3' ? "selected" :""}}>Branch 3</option>
@@ -180,7 +180,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group members-up-files">
                                             <label>Upload Member Photo (150px X 150px)</label>
-                                            <div class="uplod">
+                                            <div class="upload">
                                                 <label class="file-upload image-upbtn mb-0 @error('upload') is-invalid @enderror">
                                                     Choose File <input type="file" name="upload">
                                                 </label>

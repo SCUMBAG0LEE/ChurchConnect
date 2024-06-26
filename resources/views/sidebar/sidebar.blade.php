@@ -11,6 +11,7 @@
                         <span>Settings</span>
                     </a>
                 </li>
+                @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                 <li class="submenu {{set_active(['home','teacher/dashboard','member/dashboard'])}}">
                     <a>
                         <i class="fas fa-tachometer-alt"></i>
@@ -21,6 +22,7 @@
                         <li><a href="{{ route('home') }}" class="{{set_active(['home'])}}">Admin Dashboard</a></li>
                     </ul>
                 </li>
+                @endif
                 @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                 <li class="submenu {{set_active(['list/users'])}} {{ (request()->is('view/user/edit/*')) ? 'active' : '' }}">
                     <a href="#">
@@ -36,53 +38,35 @@
 
                 <li class="submenu {{set_active(['member/list','member/grid','member/add/page'])}} {{ (request()->is('member/edit/*')) ? 'active' : '' }} {{ (request()->is('member/profile/*')) ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-graduation-cap"></i>
-                        <span> Memberss</span>
+                        <span> Members</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
                         <li><a href="{{ route('member/list') }}"  class="{{set_active(['member/list','member/grid'])}}">Member List</a></li>
+                        @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                         <li><a href="{{ route('member/add/page') }}" class="{{set_active(['member/add/page'])}}">Member Add</a></li>
                         <li><a class="{{ (request()->is('member/edit/*')) ? 'active' : '' }}">Member Edit</a></li>
+                        @endif
                         <li><a href=""  class="{{ (request()->is('member/profile/*')) ? 'active' : '' }}">Member View</a></li>
                     </ul>
                 </li>
 
-                <li class="submenu  {{set_active(['teacher/add/page','teacher/list/page','teacher/grid/page','teacher/edit'])}} {{ (request()->is('teacher/edit/*')) ? 'active' : '' }}">
-                    <a href="#"><i class="fas fa-chalkboard-teacher"></i>
-                        <span> Teachers</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul>
-                        <li><a href="{{ route('teacher/list/page') }}" class="{{set_active(['teacher/list/page','teacher/grid/page'])}}">Teacher List</a></li>
-                        <li><a href="teacher-details.html">Teacher View</a></li>
-                        <li><a href="{{ route('teacher/add/page') }}" class="{{set_active(['teacher/add/page'])}}">Teacher Add</a></li>
-                        <li><a class="{{ (request()->is('teacher/edit/*')) ? 'active' : '' }}">Teacher Edit</a></li>
-                    </ul>
-                </li>
+
                 
-                <li class="submenu {{set_active(['department/add/page','department/edit/page'])}} {{ request()->is('department/edit/*') ? 'active' : '' }}">
+                <li class="submenu {{set_active(['branch/add/page','branch/edit/page'])}} {{ request()->is('branch/edit/*') ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-building"></i>
-                        <span> Departments</span>
+                        <span> Branches</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="{{ route('department/list/page') }}" class="{{set_active(['department/list/page'])}} {{ request()->is('department/edit/*') ? 'active' : '' }}">Department List</a></li>
-                        <li><a href="{{ route('department/add/page') }}" class="{{set_active(['department/add/page'])}}">Department Add</a></li>
-                        <li><a>Department Edit</a></li>
+                        <li><a href="{{ route('branch/list/page') }}" class="{{set_active(['branch/list/page'])}} {{ request()->is('branch/edit/*') ? 'active' : '' }}">Branch List</a></li>
+                        @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
+                        <li><a href="{{ route('branch/add/page') }}" class="{{set_active(['branch/add/page'])}}">Branch Add</a></li>
+                        <li><a>Branch Edit</a></li>
+                        @endif
                     </ul>
                 </li>
 
-                <li class="submenu {{set_active(['subject/list/page','subject/add/page'])}} {{ request()->is('subject/edit/*') ? 'active' : '' }}">
-                    <a href="#"><i class="fas fa-book-reader"></i>
-                        <span> Subjects</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul>
-                        <li><a class="{{set_active(['subject/list/page'])}} {{ request()->is('subject/edit/*') ? 'active' : '' }}" href="{{ route('subject/list/page') }}">Subject List</a></li>
-                        <li><a class="{{set_active(['subject/add/page'])}}" href="{{ route('subject/add/page') }}">Subject Add</a></li>
-                        <li><a>Subject Edit</a></li>
-                    </ul>
-                </li>
 
                 <li class="submenu {{set_active(['invoice/list/page','invoice/paid/page',
                     'invoice/overdue/page','invoice/draft/page','invoice/recurring/page',
@@ -107,31 +91,19 @@
                     <span>Management</span>
                 </li>
 
-                <li class="submenu {{set_active(['account/fees/collections/page','add/fees/collection/page'])}}">
-                    <a href="#"><i class="fas fa-file-invoice-dollar"></i>
-                        <span> Accounts</span>
+                <li class="submenu {{set_active(['worship/add/page','worship/edit/page'])}} {{ request()->is('worship/edit/*') ? 'active' : '' }}">
+                    <a href="#"><i class="fas fa-clipboard"></i>
+                        <span> Worship Event</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a class="{{set_active(['account/fees/collections/page'])}}" href="{{ route('account/fees/collections/page') }}">Fees Collection</a></li>
-                        <li><a href="expenses.html">Expenses</a></li>
-                        <li><a href="salary.html">Salary</a></li>
-                        <li><a class="{{set_active(['add/fees/collection/page'])}}" href="{{ route('add/fees/collection/page') }}">Add Fees</a></li>
-                        <li><a href="add-expenses.html">Add Expenses</a></li>
-                        <li><a href="add-salary.html">Add Salary</a></li>
+                        <!--For Worship page-->
+                        <li><a href="{{ route('worship/list') }}" class="{{ set_active(['worship/list']) }}">Worship List</a></li>
+                        @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
+                        <li><a href="{{ route('worship/add/page') }}" class="{{ set_active(['worship/add/page']) }}">Worship Add</a></li>
+                        <li><a>Worship Edit</a></li>
+                        @endif
                     </ul>
-                </li>
-                <li>
-                    <a href="holiday.html"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
-                </li>
-                <li>
-                    <a href="fees.html"><i class="fas fa-comment-dollar"></i> <span>Fees</span></a>
-                </li>
-                <li>
-                    <a href="exam.html"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>
-                </li>
-                <li>
-                    <a href="event.html"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
                 </li>
                 <li>
                     <a href="library.html"><i class="fas fa-book"></i> <span>Library</span></a>

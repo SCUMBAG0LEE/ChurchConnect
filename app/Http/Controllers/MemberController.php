@@ -146,4 +146,8 @@ class MemberController extends Controller
         $memberProfile = Member::where('id',$id)->first();
         return view('member.member-profile',compact('memberProfile'));
     }
+    
+    
 }
+
+

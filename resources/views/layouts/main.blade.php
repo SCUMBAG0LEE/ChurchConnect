@@ -20,7 +20,7 @@
       <!-- Responsive-->
       <link rel="stylesheet" href="{{ asset('assets/lpcss/responsive.css') }}">
       <!-- fevicon -->
-      <link rel="icon" href="{{ asset('images/fevicon.png') }}" type="image/gif" />
+      <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/gif" />
       <!-- font css -->
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
       <!-- Scrollbar Custom CSS -->
@@ -53,7 +53,7 @@
                         </li>
                         <li>
                            <a href="#">
-                           <i class="fa fa-envelope" aria-hidden="true"></i><span class="padding_left_10">demo@gmail.com</span>
+                           <i class="fa fa-envelope" aria-hidden="true"></i><span class="padding_left_10">BackEnd@gmail.com</span>
                            </a>
                         </li>
                      </ul>

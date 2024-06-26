@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -8,7 +9,7 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\Setting;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AccountsController;
@@ -42,6 +43,21 @@ Route::prefix('/')->group(function () {
     Route::view('contact', 'landingpage.contact');
 });
 
+Route::post('send-mail', function (\Illuminate\Http\Request $request) {
+    $details = [
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'phone' => $request->input('phone'),
+        'message' => $request->input('message'),
+    ];
+
+    try {
+        \Mail::to('darkpaladincreeper@gmail.com')->send(new \App\Mail\SendMail($details));
+        return redirect()->back()->with('status', 'success')->with('message', 'Email sent successfully.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('status', 'error')->with('message', 'Failed to send email. Please try again later.');
+    }
+});
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('home', function() {
@@ -67,8 +83,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
     });
 });
 
-Route::group(['namespace' => 'App\Http\Controllers'], function() {
+
     // -------------------------- main dashboard ----------------------//
+    Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/home', 'index')->middleware('auth')->name('home');
         Route::get('user/profile/page', 'userProfile')->middleware('auth')->name('user/profile/page');
@@ -103,37 +120,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('member/profile/{id}', 'memberProfile')->middleware('auth')->name('member/profile'); // profile member
     });
 
-    // ------------------------ teacher -------------------------------//
-    Route::controller(TeacherController::class)->group(function () {
-        Route::get('teacher/add/page', 'teacherAdd')->middleware('auth')->name('teacher/add/page'); // page teacher
-        Route::get('teacher/list/page', 'teacherList')->middleware('auth')->name('teacher/list/page'); // page teacher
-        Route::get('teacher/grid/page', 'teacherGrid')->middleware('auth')->name('teacher/grid/page'); // page grid teacher
-        Route::post('teacher/save', 'saveRecord')->middleware('auth')->name('teacher/save'); // save record
-        Route::get('teacher/edit/{user_id}', 'editRecord'); // view teacher record
-        Route::post('teacher/update', 'updateRecordTeacher')->middleware('auth')->name('teacher/update'); // update record
-        Route::post('teacher/delete', 'teacherDelete')->name('teacher/delete'); // delete record teacher
-    });
 
-    // ----------------------- department -----------------------------//
-    Route::controller(DepartmentController::class)->group(function () {
-        Route::get('department/list/page', 'departmentList')->middleware('auth')->name('department/list/page'); // department/list/page
-        Route::get('department/add/page', 'indexDepartment')->middleware('auth')->name('department/add/page'); // page add department
-        Route::get('department/edit/{department_id}', 'editDepartment'); // page add department
-        Route::post('department/save', 'saveRecord')->middleware('auth')->name('department/save'); // department/save
-        Route::post('department/update', 'updateRecord')->middleware('auth')->name('department/update'); // department/update
-        Route::post('department/delete', 'deleteRecord')->middleware('auth')->name('department/delete'); // department/delete
+    // ----------------------- branch -----------------------------//
+    Route::controller(BranchController::class)->group(function () {
+        Route::get('branch/list/page', 'branchList')->middleware('auth')->name('branch/list/page'); // branch/list/page
+        Route::get('branch/add/page', 'indexBranch')->middleware('auth')->name('branch/add/page'); // page add branch
+        Route::get('branch/edit/{branch_id}', 'editBranch'); // page add branch
+        Route::post('branch/save', 'saveRecord')->middleware('auth')->name('branch/save'); // branch/save
+        Route::post('branch/update', 'updateRecord')->middleware('auth')->name('branch/update'); // branch/update
+        Route::post('branch/delete', 'deleteRecord')->middleware('auth')->name('branch/delete'); // branch/delete
         Route::get('get-data-list', 'getDataList')->name('get-data-list'); // get data list
     });
 
-    // ----------------------- subject -----------------------------//
-    Route::controller(SubjectController::class)->group(function () {
-        Route::get('subject/list/page', 'subjectList')->middleware('auth')->name('subject/list/page'); // subject/list/page
-        Route::get('subject/add/page', 'subjectAdd')->middleware('auth')->name('subject/add/page'); // subject/add/page
-        Route::post('subject/save', 'saveRecord')->name('subject/save'); // subject/save
-        Route::post('subject/update', 'updateRecord')->name('subject/update'); // subject/update
-        Route::post('subject/delete', 'deleteRecord')->name('subject/delete'); // subject/delete
-        Route::get('subject/edit/{subject_id}', 'subjectEdit'); // subject/edit/page
-    });
 
     // ----------------------- invoice -----------------------------//
     Route::controller(InvoiceController::class)->group(function () {
@@ -161,4 +159,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('add/fees/collection/page', 'addFeesCollection')->middleware('auth')->name('add/fees/collection/page'); // add/fees/collection
         Route::post('fees/collection/save', 'saveRecord')->middleware('auth')->name('fees/collection/save'); // fees/collection/save
     });
+
+    // ----------------------- worship ----------------------------//
+    Route::controller(WorshipController::class)->group(function () {
+        Route::get('worship/add', 'create')->middleware('auth')->name('worship/add/page'); 
+        Route::post('worship/store', 'store')->middleware('auth')->name('worship/store'); 
+        Route::get('/worship/details/{id}', [WorshipController::class, 'getDetails']);
+        Route::get('/worship/list', [WorshipController::class, 'listPage'])->name('worship/list');
+    });
+    
 });
