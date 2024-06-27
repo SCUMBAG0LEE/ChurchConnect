@@ -101,7 +101,12 @@ Follow these steps to set up and run the project locally:
     php artisan migrate
     ```
 
-6. **Run the application:**
+6. **Run storage link:**
+    ```bash
+    php artisan storage:link
+    ```
+
+7. **Run the application:**
     ```bash
     php artisan serve
     ```
@@ -157,13 +162,18 @@ Follow these steps to set up and deploy the project on an Apache server:
     php artisan migrate --force
     ```
 
-6. **Set permissions:**
+6. **Run storage link:**
+    ```bash
+    php artisan storage:link
+    ```
+
+7. **Set permissions:**
     ```bash
     icacls "C:\path-to-your-project\storage" /grant IIS_IUSRS:F /T
     icacls "C:\path-to-your-project\bootstrap\cache" /grant IIS_IUSRS:F /T
     ```
 
-7. **Configure Apache:**
+8. **Configure Apache:**
     - Open the Apache configuration file (`httpd.conf`) and add the following virtual host configuration:
       ```apache
       <VirtualHost *:80>
@@ -184,7 +194,7 @@ Follow these steps to set up and deploy the project on an Apache server:
       httpd -k restart
       ```
 
-8. **Run the application:**
+9. **Run the application:**
     - Your application should now be accessible at `http://your-domain.com`.
 
 ## Contact Feature
