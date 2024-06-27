@@ -8,37 +8,50 @@ use Illuminate\Http\Request;
 
 class WorshipSummaryController extends Controller
 {
-    // Display a list of all worship summaries
-    public function index()
-    {
-        $worshipSummaries = WorshipSummary::with('worship')->get();
-        return view('worshipSummary.index', compact('worshipSummaries'));
+    public function index(Request $request)
+{
+    $worships = Worship::all(); // Assuming Worship is the model for your worships table
+
+    $worshipSummary = null;
+    if ($request->has('worship_id')) {
+        $worshipSummary = WorshipSummary::where('worship_id', $request->worship_id)->first();
     }
 
-    // Display form to create a new worship summary
+    return view('worshipSummary.sermon', compact('worships', 'worshipSummary'));
+}
+
     public function create()
     {
         $worships = Worship::all();
-        return view('worshipSummary.addSermon', compact('worships'));
+        return view('worshipSummary.add-sermon', compact('worships'));
     }
 
-    // Store a new worship summary
     public function store(Request $request)
     {
         $request->validate([
             'worship_id' => 'required|exists:worships,id',
             'speaker' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'content' => 'required|url', // Validate 'content' as a URL
             'bible_verses' => 'required|string',
         ]);
 
-        WorshipSummary::create($request->all());
+        \Log::info('Request Data:', $request->all());
 
-        return redirect()->route('worshipSummary.index')->with('success', 'Worship Summary created successfully.');
+        WorshipSummary::create([
+            'worship_id' => $request->worship_id,
+            'speaker' => $request->speaker,
+            'sermonTitle' => $request->title,
+            'content' => $request->content,
+            'bibleVerse' => $request->bible_verses,
+        ]);
+
+        return redirect()->route('worshipSummary.create')->with('success', 'Worship Summary created successfully.');
     }
 
-    // Display form to edit an existing worship summary
+    // Other methods (edit, update, show) remain the same
+
+
     public function edit($id)
     {
         $worshipSummary = WorshipSummary::findOrFail($id);
@@ -46,7 +59,6 @@ class WorshipSummaryController extends Controller
         return view('worshipSummary.edit', compact('worshipSummary', 'worships'));
     }
 
-    // Update an existing worship summary
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -60,10 +72,9 @@ class WorshipSummaryController extends Controller
         $worshipSummary = WorshipSummary::findOrFail($id);
         $worshipSummary->update($request->all());
 
-        return redirect()->route('worshipSummary.index')->with('success', 'Worship Summary updated successfully.');
+        return redirect()->route('worshipSummary.edit')->with('success', 'Worship Summary updated successfully.');
     }
 
-    // Display the worship summary for the selected date
     public function show(Request $request)
     {
         $worships = Worship::all();

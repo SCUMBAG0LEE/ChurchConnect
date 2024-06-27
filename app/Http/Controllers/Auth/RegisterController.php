@@ -55,6 +55,6 @@ class RegisterController extends Controller
         $user->update(['avatar' => $relativePath]);
 
         Toastr::success('Create new account successfully :)','Success');
-        return redirect()->route('login');
+        return redirect()->route('list/users');
     }
 }

@@ -16,3 +16,5 @@ class Worship extends Model
         return $this->belongsToMany(Member::class, 'worship_member')->withPivot('position')->withTimestamps();
     }
 }
+
+

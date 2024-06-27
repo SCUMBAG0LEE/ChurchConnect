@@ -15,32 +15,32 @@ class WorshipController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'date' => 'required|date',
-            'title' => 'required|string|max:255',
-            'note' => 'nullable|string',
-            'positions' => 'required|array',
-        ]);
+{
+    $request->validate([
+        'date' => 'required|date',
+        'title' => 'required|string|max:255',
+        'note' => 'nullable|string',
+        'positions' => 'required|array',
+    ]);
 
-        $worship = new Worship();
-        $worship->date = $request->date;
-        $worship->title = $request->title;
-        $worship->note = $request->note; // Save the note
-        $worship->save();
+    $worship = new Worship();
+    $worship->date = $request->date;
+    $worship->title = $request->title;
+    $worship->note = $request->note; // Save the note
+    $worship->save();
 
-        $syncData = [];
-        foreach ($request->positions as $memberId => $position) {
-            $syncData[$memberId] = [
-                'position' => $position,
-            ];
-        }
-
-        $worship->members()->attach($syncData);
-
-        return redirect()->route('worship/add/page')->with('success', 'Worship schedule added successfully.');
+    $syncData = [];
+    foreach ($request->positions as $memberId => $position) {
+        $syncData[$memberId] = [
+            'position' => $position,
+        ];
     }
 
+    $worship->members()->attach($syncData);
+
+    // Return JSON response instead of redirect
+    return response()->json(['message' => 'Worship schedule added successfully.'], 200);
+}
     public function listPage()
     {
         $worships = Worship::orderBy('date', 'desc')->get();
@@ -71,31 +71,31 @@ class WorshipController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'date' => 'required|date',
-            'title' => 'required|string|max:255',
-            'note' => 'nullable|string',
-            'positions' => 'required|array',
-        ]);
+{
+    $request->validate([
+        'date' => 'required|date',
+        'title' => 'required|string|max:255',
+        'note' => 'nullable|string',
+        'positions' => 'required|array',
+    ]);
 
-        $worship = Worship::findOrFail($id);
-        $worship->date = $request->date;
-        $worship->title = $request->title;
-        $worship->note = $request->note; // Save the note
-        $worship->save();
+    $worship = Worship::findOrFail($id);
+    $worship->date = $request->date;
+    $worship->title = $request->title;
+    $worship->note = $request->note; // Save the note
+    $worship->save();
 
-        $syncData = [];
-        foreach ($request->positions as $memberId => $position) {
-            $syncData[$memberId] = [
-                'position' => $position,
-            ];
-        }
-
-        $worship->members()->sync($syncData);
-
-        return redirect()->route('worship/list')->with('success', 'Worship schedule updated successfully.');
+    // Syncing members' positions
+    $syncData = [];
+    foreach ($request->positions as $memberId => $position) {
+        $syncData[$memberId] = ['position' => $position];
     }
+
+    $worship->members()->sync($syncData);
+
+    // Redirect back with success message
+    return redirect()->route('worship/list')->with('success', 'Worship schedule updated successfully.');
+}
 
     public function destroy($id)
     {
@@ -106,3 +106,5 @@ class WorshipController extends Controller
         return response()->json(['success' => 'Worship schedule deleted successfully.']);
     }
 }
+
+

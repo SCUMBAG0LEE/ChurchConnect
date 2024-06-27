@@ -33,6 +33,10 @@
                         <div id="worship-details" class="mt-4">
                             <!-- Worship details will be displayed here -->
                         </div>
+                        <div class="mt-4">
+                            <button id="edit-worship" class="btn btn-primary" style="display: none;">Edit</button>
+                            <button id="delete-worship" class="btn btn-danger" style="display: none;">Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,48 +46,93 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const worshipDropdown = document.getElementById('worship-dropdown');
-        const worshipDetails = document.getElementById('worship-details');
+    const worshipDropdown = document.getElementById('worship-dropdown');
+    const worshipDetails = document.getElementById('worship-details');
+    const editButton = document.getElementById('edit-worship');
+    const deleteButton = document.getElementById('delete-worship');
 
-        worshipDropdown.addEventListener('change', function () {
-            const worshipId = this.value;
-            if (worshipId) {
-                fetch(`{{ url('/worship/details') }}/${worshipId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        let detailsHtml = `
-                            <h5 class="form-title member-info">Worship Information</h5>
-                            <p><strong>Date:</strong> ${data.date}</p>
-                            <p><strong>Title:</strong> ${data.title}</p>
-                            <h5 class="form-title member-info">Workers</h5>
-                            <table class="table table-bordered mt-3">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                        `;
-                        data.members.forEach(member => {
-                            detailsHtml += `
+    worshipDropdown.addEventListener('change', function () {
+        const worshipId = this.value;
+        if (worshipId) {
+            fetch(`{{ url('/worship/details') }}/${worshipId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let detailsHtml = `
+                        <h5 class="form-title member-info">Worship Information</h5>
+                        <p><strong>Date:</strong> ${data.date}</p>
+                        <p><strong>Title:</strong> ${data.title}</p>
+                        <p><strong>Note:</strong> ${data.note}</p>
+                        <h5 class="form-title member-info">Workers</h5>
+                        <table class="table table-bordered mt-3">
+                            <thead>
                                 <tr>
-                                    <td>${member.name}</td>
-                                    <td>${member.pivot.position}</td>
+                                    <th>Name</th>
+                                    <th>Position</th>
                                 </tr>
-                            `;
-                        });
-                        detailsHtml += `</tbody></table>`;
-                        worshipDetails.innerHTML = detailsHtml;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching worship details:', error);
-                        worshipDetails.innerHTML = `<p class="text-danger">Error fetching worship details.</p>`;
+                            </thead>
+                            <tbody>
+                    `;
+                    data.members.forEach(member => {
+                        detailsHtml += `
+                            <tr>
+                                <td>${member.name}</td>
+                                <td>${member.pivot.position}</td>
+                            </tr>
+                        `;
                     });
-            } else {
-                worshipDetails.innerHTML = ''; // Clear details if no worship is selected
-            }
-        });
+                    detailsHtml += `</tbody></table>`;
+                    worshipDetails.innerHTML = detailsHtml;
+
+                    editButton.style.display = 'inline-block';
+                    deleteButton.style.display = 'inline-block';
+
+                    // Set data-id attribute for delete button
+                    deleteButton.setAttribute('data-id', worshipId);
+                })
+                .catch(error => {
+                    console.error('Error fetching worship details:', error);
+                    worshipDetails.innerHTML = `<p class="text-danger">Error fetching worship details.</p>`;
+                    editButton.style.display = 'none';
+                    deleteButton.style.display = 'none';
+                });
+        } else {
+            worshipDetails.innerHTML = ''; // Clear details if no worship is selected
+            editButton.style.display = 'none';
+            deleteButton.style.display = 'none';
+        }
     });
+
+    editButton.addEventListener('click', function () {
+        const worshipId = worshipDropdown.value;
+        if (worshipId) {
+            window.location.href = `{{ url('/worship/edit') }}/${worshipId}`;
+        }
+    });
+
+    deleteButton.addEventListener('click', function () {
+        const worshipId = this.getAttribute('data-id');
+        if (worshipId && confirm('Are you sure you want to delete this worship schedule?')) {
+            fetch(`{{ url('/worship/delete') }}/${worshipId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.success);
+                        location.reload();
+                    } else {
+                        alert('Error deleting worship schedule.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting worship schedule:', error);
+                    alert('Error deleting worship schedule.');
+                });
+        }
+    });
+});
 </script>
 @endsection

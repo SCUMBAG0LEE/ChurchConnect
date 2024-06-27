@@ -13,7 +13,6 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AccountsController;
-use App\Http\Controllers\WorshipSummaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +26,7 @@ use App\Http\Controllers\WorshipSummaryController;
 */
 
 /** for side bar menu active */
-function set_active($route)
-{
+function set_active($route) {
     if (is_array($route)) {
         return in_array(Request::path(), $route) ? 'active' : '';
     }
@@ -54,22 +52,22 @@ Route::post('send-mail', function (\Illuminate\Http\Request $request) {
     ];
 
     try {
-        \Mail::to('darkpaladincreeper@gmail.com')->send(new \App\Mail\SendMail($details));
+        \Mail::to('milson0403@gmail.com')->send(new \App\Mail\SendMail($details));
         return redirect()->back()->with('status', 'success')->with('message', 'Email sent successfully.');
     } catch (\Exception $e) {
         return redirect()->back()->with('status', 'error')->with('message', 'Failed to send email. Please try again later.');
     }
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('home', function () {
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('home', function() {
         return view('home');
     });
 });
 
 Auth::routes();
 
-Route::group(['namespace' => 'App\Http\Controllers\Auth'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
     // ----------------------------login ------------------------------//
     Route::controller(LoginController::class)->group(function () {
         Route::get('/login', 'login')->name('login');
@@ -81,13 +79,13 @@ Route::group(['namespace' => 'App\Http\Controllers\Auth'], function () {
     // ----------------------------- register -------------------------//
     Route::controller(RegisterController::class)->group(function () {
         Route::get('/register', 'register')->name('register');
-        Route::post('/register', 'storeUser')->name('register');
+        Route::post('/register', 'storeUser')->name('register');    
     });
 });
 
 
-// -------------------------- main dashboard ----------------------//
-Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    // -------------------------- main dashboard ----------------------//
+    Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/home', 'index')->middleware('auth')->name('home');
         Route::get('user/profile/page', 'userProfile')->middleware('auth')->name('user/profile/page');
@@ -102,8 +100,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('view/user/edit/{id}', 'userView')->middleware('auth');
         Route::post('user/update', 'userUpdate')->name('user/update');
         Route::post('user/delete', 'userDelete')->name('user/delete');
-        Route::get('get-users-data', 'getUsersData')->name('get-users-data');
-        /** get all data users */
+        Route::get('get-users-data', 'getUsersData')->name('get-users-data'); /** get all data users */
     });
 
     // ------------------------ setting -------------------------------//
@@ -121,6 +118,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('member/update', 'memberUpdate')->name('member/update'); // update record member
         Route::post('member/delete', 'memberDelete')->name('member/delete'); // delete record member
         Route::get('member/profile/{id}', 'memberProfile')->middleware('auth')->name('member/profile'); // profile member
+        Route::get('member/search', 'search')->name('member/search');
     });
 
 
@@ -164,15 +162,20 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
 
     // ----------------------- worship ----------------------------//
-    Route::controller(WorshipController::class)->group(function () {
-        Route::get('worship/add', 'create')->middleware('auth')->name('worship/add/page');
-        Route::post('worship/store', 'store')->middleware('auth')->name('worship/store');
-        Route::get('/worship/details/{id}', [WorshipController::class, 'getDetails']);
-        Route::get('/worship/list', [WorshipController::class, 'listPage'])->name('worship/list');
-    });
-
-    // ----------------------- Worship or Sermon Summary ----------------------------//
-    Route::resource('worshipSummary', WorshipSummaryController::class);
-    Route::get('worshipSummary', [WorshipSummaryController::class, 'index'])->name('worshipSummary.index');
-    Route::get('worshipSummary/show', [WorshipSummaryController::class, 'show'])->name('worshipSummary.show');
+Route::controller(WorshipController::class)->group(function () {
+    Route::get('worship/add', 'create')->middleware('auth')->name('worship/add/page'); 
+    Route::post('worship/store', 'store')->middleware('auth')->name('worship/store'); 
+    Route::get('/worship/details/{id}', 'getDetails');
+    Route::get('/worship/list', 'listPage')->name('worship/list');
+    Route::get('/worship/edit/{id}', 'edit')->name('worship/edit')->middleware('auth');
+    Route::put('/worship/update/{id}', 'update')->name('worship/update')->middleware('auth');
+    Route::delete('/worship/delete/{id}', 'destroy')->name('worship/delete')->middleware('auth');
 });
+
+// ----------------------- Worship or Sermon Summary ----------------------------//
+Route::resource('worshipSummary', WorshipSummaryController::class);
+
+
+
+});
+
