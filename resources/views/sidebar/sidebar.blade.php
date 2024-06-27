@@ -78,14 +78,14 @@
                         <span> Invoices</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <ul>
+                    <!-- <ul>
                         <li><a class="{{set_active(['invoice/list/page','invoice/paid/page','invoice/overdue/page','invoice/draft/page','invoice/recurring/page','invoice/cancelled/page'])}}" href="{{ route('invoice/list/page') }}">Invoices List</a></li>
                         <li><a class="{{set_active(['invoice/grid/page'])}}" href="{{ route('invoice/grid/page') }}">Invoices Grid</a></li>
                         <li><a class="{{set_active(['invoice/add/page'])}}" href="{{ route('invoice/add/page') }}">Add Invoices</a></li>
                         <li><a class="{{ request()->is('invoice/edit/*') ? 'active' : '' }}" href="">Edit Invoices</a></li>
                         <li><a class="{{ request()->is('invoice/view/*') ? 'active' : '' }}" href="">Invoices Details</a></li>
                         <li><a class="{{set_active(['invoice/settings/page','invoice/settings/tax/page','invoice/settings/bank/page'])}}" href="{{ route('invoice/settings/page') }}">Invoices Settings</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
 
                 <li class="menu-title">
@@ -124,7 +124,7 @@
     </ul>
 </li>
                 <li>
-                    <a href="library.html"><i class="fas fa-book"></i> <span>Library</span></a>
+                    <a href="#"><i class="fas fa-book"></i> <span>Library</span></a>
                 </li>
             </ul>
         </div>
