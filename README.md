@@ -74,12 +74,21 @@ Follow these steps to set up and run the project locally:
       ```
     - Update the `.env` file with your database configuration and other necessary settings:
       ```dotenv
-      DB_CONNECTION=mysql
+      DB_CONNECTION=pgsql
       DB_HOST=your-database-host
-      DB_PORT=3306
-      DB_DATABASE=your-database-name
+      DB_PORT=5432
+      DB_DATABASE=ChurchConnect
       DB_USERNAME=your-database-username
       DB_PASSWORD=your-database-password
+      
+      MAIL_MAILER=smtp
+      MAIL_HOST=your-smtp-host
+      MAIL_PORT=your-smtp-port
+      MAIL_USERNAME=your-smtp-username
+      MAIL_PASSWORD=your-smtp-password
+      MAIL_ENCRYPTION=tls
+      MAIL_FROM_ADDRESS="${MAIL_USERNAME}"
+      MAIL_FROM_NAME="${APP_NAME}"
       ```
 
 4. **Generate application key:**
@@ -121,12 +130,21 @@ Follow these steps to set up and deploy the project on an Apache server:
       ```
     - Update the `.env` file with your database configuration and other necessary settings:
       ```dotenv
-      DB_CONNECTION=mysql
+      DB_CONNECTION=pgsql
       DB_HOST=your-database-host
-      DB_PORT=3306
-      DB_DATABASE=your-database-name
+      DB_PORT=5432
+      DB_DATABASE=ChurchConnect
       DB_USERNAME=your-database-username
       DB_PASSWORD=your-database-password
+      
+      MAIL_MAILER=smtp
+      MAIL_HOST=your-smtp-host
+      MAIL_PORT=your-smtp-port
+      MAIL_USERNAME=your-smtp-username
+      MAIL_PASSWORD=your-smtp-password
+      MAIL_ENCRYPTION=tls
+      MAIL_FROM_ADDRESS="${MAIL_USERNAME}"
+      MAIL_FROM_NAME="${APP_NAME}"
       ```
 
 4. **Generate application key:**
