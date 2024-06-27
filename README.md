@@ -49,6 +49,127 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
 - **[Lendio](https://lendio.com)**
 
+## Installation Guide
+
+### Local Development Setup
+
+Follow these steps to set up and run the project locally:
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/SCUMBAG0LEE/ChurchConnect.git
+    cd your-repository
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    composer install
+    npm install
+    ```
+
+3. **Set up environment variables:**
+    - Copy the `.env.example` file to `.env`:
+      ```bash
+      cp .env.example .env
+      ```
+    - Update the `.env` file with your database configuration and other necessary settings:
+      ```dotenv
+      DB_CONNECTION=mysql
+      DB_HOST=your-database-host
+      DB_PORT=3306
+      DB_DATABASE=your-database-name
+      DB_USERNAME=your-database-username
+      DB_PASSWORD=your-database-password
+      ```
+
+4. **Generate application key:**
+    ```bash
+    php artisan key:generate
+    ```
+
+5. **Run database migrations:**
+    ```bash
+    php artisan migrate
+    ```
+
+6. **Run the application:**
+    ```bash
+    php artisan serve
+    ```
+    - Your application will be accessible at `http://127.0.0.1:8000`.
+
+### Production Setup with Apache
+
+Follow these steps to set up and deploy the project on an Apache server:
+
+1. **Clone the repository to your server:**
+    ```bash
+    git clone https://github.com/SCUMBAG0LEE/ChurchConnect.git
+    cd your-repository
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    composer install --optimize-autoloader --no-dev
+    npm install --production
+    ```
+
+3. **Set up environment variables:**
+    - Copy the `.env.example` file to `.env`:
+      ```bash
+      cp .env.example .env
+      ```
+    - Update the `.env` file with your database configuration and other necessary settings:
+      ```dotenv
+      DB_CONNECTION=mysql
+      DB_HOST=your-database-host
+      DB_PORT=3306
+      DB_DATABASE=your-database-name
+      DB_USERNAME=your-database-username
+      DB_PASSWORD=your-database-password
+      ```
+
+4. **Generate application key:**
+    ```bash
+    php artisan key:generate
+    ```
+
+5. **Run database migrations:**
+    ```bash
+    php artisan migrate --force
+    ```
+
+6. **Set permissions:**
+    ```bash
+    sudo chown -R www-data:www-data /path-to-your-project
+    sudo chmod -R 775 /path-to-your-project/storage /path-to-your-project/bootstrap/cache
+    ```
+
+7. **Configure Apache:**
+    - Create a new virtual host configuration file for your Laravel project:
+      ```apache
+      <VirtualHost *:80>
+          ServerName your-domain.com
+          DocumentRoot /path-to-your-project/public
+
+          <Directory /path-to-your-project>
+              AllowOverride All
+          </Directory>
+
+          ErrorLog ${APACHE_LOG_DIR}/your-project-error.log
+          CustomLog ${APACHE_LOG_DIR}/your-project-access.log combined
+      </VirtualHost>
+      ```
+    - Enable the site and rewrite module, then restart Apache:
+      ```bash
+      sudo a2ensite your-project
+      sudo a2enmod rewrite
+      sudo systemctl restart apache2
+      ```
+
+8. **Run the application:**
+    - Your application should now be accessible at `http://your-domain.com`.
+
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
