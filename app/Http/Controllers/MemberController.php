@@ -147,7 +147,31 @@ class MemberController extends Controller
         return view('member.member-profile',compact('memberProfile'));
     }
     
-    
+    public function search(Request $request)
+    {
+        $search_id = $request->input('search_id');
+        $search_name = $request->input('search_name');
+        $search_phone = $request->input('search_phone');
+
+        $query = Member::query();
+
+        if ($search_id) {
+            $query->where('id', 'LIKE', "%{$search_id}%");
+        }
+
+        if ($search_name) {
+            $query->where(function($q) use ($search_name) {
+                $q->where('first_name', 'LIKE', "%{$search_name}%")
+                  ->orWhere('last_name', 'LIKE', "%{$search_name}%");
+            });
+        }
+
+        if ($search_phone) {
+            $query->where('phone_number', 'LIKE', "%{$search_phone}%");
+        }
+
+        $memberList = $query->get();
+
+        return view('member.member', compact('memberList'));
+    }
 }
-
-

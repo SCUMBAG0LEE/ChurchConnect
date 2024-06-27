@@ -1,5 +1,7 @@
 @extends('layouts.master')
+
 @section('content')
+{!! Toastr::message() !!}
 <div class="page-wrapper">
     <div class="content container-fluid">
         <div class="page-header">
@@ -15,12 +17,12 @@
                 </div>
             </div>
         </div>
-        {!! Toastr::message() !!}
+        
         <div class="row">
             <div class="col-sm-12">
                 <div class="card comman-shadow">
                     <div class="card-body">
-                        <form action="{{ route('worship/store') }}" method="POST">
+                        <form action="{{ route('worship/store') }}" method="POST" id="worship-form">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -100,6 +102,7 @@
         </div>
     </div>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const memberSearchInput = document.getElementById('member-search-input');
@@ -178,6 +181,31 @@
             }
             return '';
         }
+
+        // Form submission handling
+        const worshipForm = document.getElementById('worship-form');
+        worshipForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            fetch(this.action, {
+                method: this.method,
+                body: new FormData(this)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message); // Show alert with the message
+                    // Reload the page to clear form inputs
+                    window.location.reload();
+                } else {
+                    console.error('Unexpected response format:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error if needed
+            });
+        });
     });
 </script>
 @endsection

@@ -13,12 +13,12 @@ class WorshipSummary extends Model
         'worship_id',
         'speaker',
         'sermonTitle',
-        'sermonContent',
+        'content', // Change 'sermonContent' to 'content'
         'bibleVerse',
     ];
 
-    public function WorshipSummary()
+    public function worship()
     {
-        return $this->belongsTo(Worship::class);
+        return $this->belongsTo(Worship::class, 'worship_id');
     }
 }

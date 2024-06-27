@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         // Create worships summary table
-        Schema::create('worship_summary', function (Blueprint $table) {
+        Schema::create('worship_summaries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('worship_id')->constrained('worships')->onDelete('cascade'); //FK constraint
             $table->string('speaker');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('worship_summary');
+        Schema::dropIfExists('worship_summaries');
     }
 };
