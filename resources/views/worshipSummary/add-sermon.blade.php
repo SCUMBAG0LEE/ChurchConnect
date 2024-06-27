@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+{!! Toastr::message() !!}
 <div class="page-wrapper">
     <div class="content container-fluid">
         <div class="container">
@@ -8,7 +9,7 @@
 
             <div class="card common-shadow">
                 <div class="card-body">
-                    <form action="{{ route('worshipSummary.store') }}" method="POST">
+                    <form id="create-sermon-form">
                         @csrf
 
                         <div class="form-group">
@@ -49,4 +50,36 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('create-sermon-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch('{{ route('worshipSummary.store') }}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                toastr.success(data.message);
+                form.reset();
+            } else {
+                console.error('Unexpected response format:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error if needed
+        });
+    });
+});
+</script>
 @endsection
