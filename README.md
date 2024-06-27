@@ -195,6 +195,7 @@ Route::post('send-mail', function (Request $request) {
 });
 
 Replace 'user@example.com' with your actual email address.
+```
 
 ## Contributing
 
