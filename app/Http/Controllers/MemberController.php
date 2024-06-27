@@ -175,5 +175,3 @@ class MemberController extends Controller
         return view('member.member', compact('memberList'));
     }
 }
-
-

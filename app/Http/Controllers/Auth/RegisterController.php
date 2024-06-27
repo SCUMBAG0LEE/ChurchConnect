@@ -19,10 +19,7 @@ class RegisterController extends Controller
         $role = DB::table('role_type_users')->get();
         return view('auth.register',compact('role'));
     }
-<<<<<<< HEAD
     
-=======
->>>>>>> Worship-schedule
     public function storeUser(Request $request)
     {
         $request->validate([
@@ -35,24 +32,16 @@ class RegisterController extends Controller
 
         $dt       = Carbon::now();
         $todayDate = $dt->toDayDateTimeString();
-<<<<<<< HEAD
         $defaultImagePath = public_path('images/photo_defaults.jpg');
         
         $user = User::create([
             'name'      => $request->name,
             'avatar'    => $defaultImagePath,
-=======
-        
-        User::create([
-            'name'      => $request->name,
-            'avatar'    => $request->image,
->>>>>>> Worship-schedule
             'email'     => $request->email,
             'join_date' => $todayDate,
             'role_name' => $request->role_name,
             'password'  => Hash::make($request->password),
         ]);
-<<<<<<< HEAD
 
         $userImagePath = public_path('images\\user_pfp\\' . $user->id . '.jpg');
 
@@ -66,12 +55,6 @@ class RegisterController extends Controller
         $user->update(['avatar' => $relativePath]);
 
         Toastr::success('Create new account successfully :)','Success');
-        return redirect()->route('login');
+        return redirect()->route('list/users');
     }
 }
-=======
-        Toastr::success('Create new account successfully :)','Success');
-        return redirect()->route('login');
-    }
-}
->>>>>>> Worship-schedule

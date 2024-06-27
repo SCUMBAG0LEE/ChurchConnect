@@ -52,7 +52,7 @@ Route::post('send-mail', function (\Illuminate\Http\Request $request) {
     ];
 
     try {
-        \Mail::to('darkpaladincreeper@gmail.com')->send(new \App\Mail\SendMail($details));
+        \Mail::to('milson0403@gmail.com')->send(new \App\Mail\SendMail($details));
         return redirect()->back()->with('status', 'success')->with('message', 'Email sent successfully.');
     } catch (\Exception $e) {
         return redirect()->back()->with('status', 'error')->with('message', 'Failed to send email. Please try again later.');
@@ -162,11 +162,20 @@ Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
     });
 
     // ----------------------- worship ----------------------------//
-    Route::controller(WorshipController::class)->group(function () {
-        Route::get('worship/add', 'create')->middleware('auth')->name('worship/add/page'); 
-        Route::post('worship/store', 'store')->middleware('auth')->name('worship/store'); 
-        Route::get('/worship/details/{id}', [WorshipController::class, 'getDetails']);
-        Route::get('/worship/list', [WorshipController::class, 'listPage'])->name('worship/list');
-    });
-    
+Route::controller(WorshipController::class)->group(function () {
+    Route::get('worship/add', 'create')->middleware('auth')->name('worship/add/page'); 
+    Route::post('worship/store', 'store')->middleware('auth')->name('worship/store'); 
+    Route::get('/worship/details/{id}', 'getDetails');
+    Route::get('/worship/list', 'listPage')->name('worship/list');
+    Route::get('/worship/edit/{id}', 'edit')->name('worship/edit')->middleware('auth');
+    Route::put('/worship/update/{id}', 'update')->name('worship/update')->middleware('auth');
+    Route::delete('/worship/delete/{id}', 'destroy')->name('worship/delete')->middleware('auth');
 });
+
+// ----------------------- Worship or Sermon Summary ----------------------------//
+Route::resource('worshipSummary', WorshipSummaryController::class);
+
+
+
+});
+

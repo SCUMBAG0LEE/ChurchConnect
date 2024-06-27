@@ -52,20 +52,11 @@ class UserManagementController extends Controller
                 $image_name = $request->hidden_avatar;
                 $image = $request->file('avatar');
 
-                if($image_name =='photo_defaults.jpg') {
-                    if ($image != '') {
-                        $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                        $image->move(public_path('/images/'), $image_name);
-                    }
-                } else {
-                    
-                    if($image != '') {
-                        unlink('images/'.$image_name);
-                        $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                        $image->move(public_path('/images/'), $image_name);
-                    }
+                if ($image != '') {
+                    $image_name = $user_id . '.' . $image->getClientOriginalExtension();
+                    $image->move(public_path('/images/user_pfp/'), $image_name);
                 }
-            
+
                 $update = [
                     'user_id'       => $user_id,
                     'name'          => $name,
@@ -76,7 +67,7 @@ class UserManagementController extends Controller
                     'date_of_birth' => $date_of_birth,
                     'department'    => $department,
                     'status'        => $status,
-                    'avatar'        => $image_name,
+                    'avatar'        => 'user_pfp\\' . $image_name,
                 ];
 
                 User::where('user_id',$request->user_id)->update($update);
@@ -85,6 +76,7 @@ class UserManagementController extends Controller
             }
             DB::commit();
             Toastr::success('User updated successfully :)','Success');
+            Session::put('avatar', 'user_pfp\\'. $image_name);
             return redirect()->back();
 
         } catch(\Exception $e){

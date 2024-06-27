@@ -55,9 +55,11 @@
                                     <a href="#" class="btn btn-outline-primary me-2">
                                         <i class="fas fa-download"></i> Download
                                     </a>
+                                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                                     <a href="{{ route('branch/add/page') }}" class="btn btn-primary">
                                         <i class="fas fa-plus"></i>
                                     </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -72,7 +74,9 @@
                                     <th>Established Since</th>
                                     <th>Website Link</th>
                                     <th>No of Members</th>
+                                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                                     <th class="text-end">Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                         </table>
@@ -116,17 +120,19 @@
 </div>
 
 @section('script')
-    {{-- get data all js --}}
     <script type="text/javascript">
         $(document).ready(function() {
-        $('#dataList').DataTable({
+            $('#dataList').DataTable({
                 processing: true,
                 serverSide: true,
                 ordering: true,
                 searching: true,
                 ajax: {
-                    url:"{{ route('get-data-list') }}",
-                    type: 'GET'
+                    url: "{{ route('get-data-list') }}",
+                    type: 'GET',
+                    data: function(d) {
+                        d.role_name = "{{ Session::get('role_name') }}"; // Pass role_name here
+                    }
                 },
                 columns: [
                     {
@@ -163,22 +169,15 @@
                         data: 'no_of_members',
                         name: 'no_of_members',
                     },
+                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                     {
                         data: 'modify',
                         name: 'modify',
                     },
+                    @endif
                 ]
             });
         });
     </script>
-
-    {{-- delete js --}}
-<script>
-    $(document).on('click','.delete',function()
-    {
-        var _this = $(this).parents('tr');
-        $('.e_branch_id').val(_this.find('.branch_id').data('branch_id'));
-    });
-</script>
 @endsection
 @endsection

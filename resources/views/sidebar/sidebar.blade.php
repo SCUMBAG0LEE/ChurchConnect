@@ -11,10 +11,7 @@
                         <span>Settings</span>
                     </a>
                 </li>
-<<<<<<< HEAD
                 @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
-=======
->>>>>>> Worship-schedule
                 <li class="submenu {{set_active(['home','teacher/dashboard','member/dashboard'])}}">
                     <a>
                         <i class="fas fa-tachometer-alt"></i>
@@ -25,10 +22,7 @@
                         <li><a href="{{ route('home') }}" class="{{set_active(['home'])}}">Admin Dashboard</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
                 @endif
-=======
->>>>>>> Worship-schedule
                 @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                 <li class="submenu {{set_active(['list/users'])}} {{ (request()->is('view/user/edit/*')) ? 'active' : '' }}">
                     <a href="#">
@@ -38,6 +32,7 @@
                     </a>
                     <ul>
                         <li><a href="{{ route('list/users') }}" class="{{set_active(['list/users'])}} {{ (request()->is('view/user/edit/*')) ? 'active' : '' }}">List Users</a></li>
+                        <li><a href="/register">Create Account</a></li>
                     </ul>
                 </li>
                 @endif
@@ -49,15 +44,10 @@
                     </a>
                     <ul>
                         <li><a href="{{ route('member/list') }}"  class="{{set_active(['member/list','member/grid'])}}">Member List</a></li>
-<<<<<<< HEAD
                         @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                         <li><a href="{{ route('member/add/page') }}" class="{{set_active(['member/add/page'])}}">Member Add</a></li>
                         <li><a class="{{ (request()->is('member/edit/*')) ? 'active' : '' }}">Member Edit</a></li>
                         @endif
-=======
-                        <li><a href="{{ route('member/add/page') }}" class="{{set_active(['member/add/page'])}}">Member Add</a></li>
-                        <li><a class="{{ (request()->is('member/edit/*')) ? 'active' : '' }}">Member Edit</a></li>
->>>>>>> Worship-schedule
                         <li><a href=""  class="{{ (request()->is('member/profile/*')) ? 'active' : '' }}">Member View</a></li>
                     </ul>
                 </li>
@@ -71,15 +61,10 @@
                     </a>
                     <ul>
                         <li><a href="{{ route('branch/list/page') }}" class="{{set_active(['branch/list/page'])}} {{ request()->is('branch/edit/*') ? 'active' : '' }}">Branch List</a></li>
-<<<<<<< HEAD
                         @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                         <li><a href="{{ route('branch/add/page') }}" class="{{set_active(['branch/add/page'])}}">Branch Add</a></li>
                         <li><a>Branch Edit</a></li>
                         @endif
-=======
-                        <li><a href="{{ route('branch/add/page') }}" class="{{set_active(['branch/add/page'])}}">Branch Add</a></li>
-                        <li><a>Branch Edit</a></li>
->>>>>>> Worship-schedule
                     </ul>
                 </li>
 
@@ -98,7 +83,7 @@
                         <li><a class="{{set_active(['invoice/grid/page'])}}" href="{{ route('invoice/grid/page') }}">Invoices Grid</a></li>
                         <li><a class="{{set_active(['invoice/add/page'])}}" href="{{ route('invoice/add/page') }}">Add Invoices</a></li>
                         <li><a class="{{ request()->is('invoice/edit/*') ? 'active' : '' }}" href="">Edit Invoices</a></li>
-                        <li> <a class="{{ request()->is('invoice/view/*') ? 'active' : '' }}" href="">Invoices Details</a></li>
+                        <li><a class="{{ request()->is('invoice/view/*') ? 'active' : '' }}" href="">Invoices Details</a></li>
                         <li><a class="{{set_active(['invoice/settings/page','invoice/settings/tax/page','invoice/settings/bank/page'])}}" href="{{ route('invoice/settings/page') }}">Invoices Settings</a></li>
                     </ul>
                 </li>
@@ -107,7 +92,7 @@
                     <span>Management</span>
                 </li>
 
-                <li class="submenu {{set_active(['worship/add/page','worship/edit/page'])}} {{ request()->is('worship/edit/*') ? 'active' : '' }}">
+                <li class="submenu {{set_active(['worship/add/page', 'worship/edit/page'])}} {{ request()->is('worship/edit/*') ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-clipboard"></i>
                         <span> Worship Event</span>
                         <span class="menu-arrow"></span>
@@ -115,25 +100,33 @@
                     <ul>
                         <!--For Worship page-->
                         <li><a href="{{ route('worship/list') }}" class="{{ set_active(['worship/list']) }}">Worship List</a></li>
-<<<<<<< HEAD
-                        @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
-                        <li><a href="{{ route('worship/add/page') }}" class="{{ set_active(['worship/add/page']) }}">Worship Add</a></li>
+                        @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
+                        <li><a href="{{ route('worship/add/page') }}" class="{{ set_active(['worship/add']) }}">Worship Add</a></li>
                         <li><a>Worship Edit</a></li>
                         @endif
-=======
-                        <li><a href="{{ route('worship/add/page') }}" class="{{ set_active(['worship/add/page']) }}">Worship Add</a></li>
-                        <li><a>Worship Edit</a></li>
->>>>>>> Worship-schedule
                     </ul>
                 </li>
+
+                <!-- Sermon Summary Menu Item -->
+<li class="submenu {{ set_active(['worshipSummary/add', 'worshipSummary/edit']) }} {{ request()->is('worshipSummary/edit/*') ? 'active' : '' }}">
+    <a href="#"><i class="fas fa-file-alt"></i>
+        <span> Sermon Summary</span>
+        <span class="menu-arrow"></span>
+    </a>
+    <ul>
+    <li><a href="{{ route('worshipSummary.index') }}" class="{{ set_active(['worshipSummary']) }}"> View Sermon Summary </a></li>
+    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
+        <li><a href="{{ route('worshipSummary.create') }}" class="{{ set_active(['worshipSummary/create']) }}">Add Sermon Summary</a></li>
+        @if(isset($worshipSummaries) && $worshipSummaries->isNotEmpty()) <!-- Check if $worshipSummaries is not empty -->
+        <li><a href="{{ route('worshipSummary.edit', ['worshipSummary' => $worshipSummaries->first()->id]) }}" class="{{ set_active(['worshipSummary/edit']) }} {{ request()->is('worshipSummary/*/edit') ? 'active' : '' }}">Edit Sermon Summary</a></li>
+        @endif
+    @endif
+    </ul>
+</li>
                 <li>
                     <a href="library.html"><i class="fas fa-book"></i> <span>Library</span></a>
                 </li>
             </ul>
         </div>
     </div>
-<<<<<<< HEAD
 </div>
-=======
-</div>
->>>>>>> Worship-schedule
