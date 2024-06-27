@@ -14,7 +14,7 @@ class BranchController extends Controller
     {
         return view('branch.add-branch');
     }
-    
+
     /** edit record */
     public function editBranch($branch_id)
     {
@@ -68,13 +68,13 @@ class BranchController extends Controller
             ->take($rowPerPage)
             ->get();
         $data_arr = [];
-        
+
         foreach ($records as $key => $record) {
 
             if ($roleName === 'Admin' || $roleName === 'Super Admin')
             {
             $modify = '
-                <td class="text-end"> 
+                <td class="text-end">
                     <div class="actions">
                         <a href="'.url('branch/edit/'.$record->branch_id).'" class="btn btn-sm bg-danger-light">
                             <i class="far fa-edit me-2"></i>
@@ -88,15 +88,7 @@ class BranchController extends Controller
             }
             else
             {
-                $modify = '
-                <td class="text-end"> 
-                    <div class="actions">
-                        <a class="btn btn-sm bg-danger-light delete branch_id" data-bs-toggle="modal" data-branch_id="'.$record->id.'" data-bs-target="#delete">
-                        <i class="fe fe-trash-2"></i>
-                        </a>
-                    </div>
-                </td>
-            ';
+                $modify = '';
             }
 
             $data_arr [] = [
@@ -143,7 +135,7 @@ class BranchController extends Controller
             $saveRecord->branch_website    = $request->branch_website;
             $saveRecord->no_of_members     = $request->no_of_members;
             $saveRecord->save();
-   
+
             Toastr::success('Branch has been added successfully!', 'Success');
             return redirect()->back();
         } catch(\Exception $e) {
@@ -158,7 +150,7 @@ class BranchController extends Controller
     {
         DB::beginTransaction();
         try {
-            
+
             $updateRecord = [
                 'branch_name'       => $request->branch_name,
                 'branch_address'    => $request->branch_address,
@@ -172,7 +164,7 @@ class BranchController extends Controller
             Toastr::success('Has been update successfully :)','Success');
             DB::commit();
             return redirect()->back();
-           
+
         } catch(\Exception $e) {
             \Log::info($e);
             DB::rollback();
@@ -182,7 +174,7 @@ class BranchController extends Controller
     }
 
     /** branch delete record */
-    public function deleteRecord(Request $request) 
+    public function deleteRecord(Request $request)
     {
         DB::beginTransaction();
         try {
@@ -191,7 +183,7 @@ class BranchController extends Controller
             DB::commit();
             Toastr::success('Branch deleted successfully :)','Success');
             return redirect()->back();
-    
+
         } catch(\Exception $e) {
             \Log::info($e);
             DB::rollback();

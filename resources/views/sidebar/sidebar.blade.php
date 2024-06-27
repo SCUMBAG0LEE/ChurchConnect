@@ -83,7 +83,7 @@
                         <li><a class="{{set_active(['invoice/grid/page'])}}" href="{{ route('invoice/grid/page') }}">Invoices Grid</a></li>
                         <li><a class="{{set_active(['invoice/add/page'])}}" href="{{ route('invoice/add/page') }}">Add Invoices</a></li>
                         <li><a class="{{ request()->is('invoice/edit/*') ? 'active' : '' }}" href="">Edit Invoices</a></li>
-                        <li> <a class="{{ request()->is('invoice/view/*') ? 'active' : '' }}" href="">Invoices Details</a></li>
+                        <li><a class="{{ request()->is('invoice/view/*') ? 'active' : '' }}" href="">Invoices Details</a></li>
                         <li><a class="{{set_active(['invoice/settings/page','invoice/settings/tax/page','invoice/settings/bank/page'])}}" href="{{ route('invoice/settings/page') }}">Invoices Settings</a></li>
                     </ul>
                 </li>
@@ -100,8 +100,8 @@
                     <ul>
                         <!--For Worship page-->
                         <li><a href="{{ route('worship/list') }}" class="{{ set_active(['worship/list']) }}">Worship List</a></li>
-                        @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
-                        <li><a href="{{ route('worship/add/page') }}" class="{{ set_active(['worship/add/page']) }}">Worship Add</a></li>
+                        @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
+                        <li><a href="{{ route('worship/add/page') }}" class="{{ set_active(['worship/add']) }}">Worship Add</a></li>
                         <li><a>Worship Edit</a></li>
                         @endif
                     </ul>
@@ -114,13 +114,11 @@
         <span class="menu-arrow"></span>
     </a>
     <ul>
-    <li>
-    <a href="{{ route('worshipSummary.index') }}" class="{{ set_active(['worshipSummary.index']) }}"> View Sermon Summary </a>
-    </li>
-    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
-        <li><a href="{{ route('worshipSummary.create') }}" class="{{ set_active(['worshipSummary.create']) }}">Add Sermon Summary</a></li>
+    <li><a href="{{ route('worshipSummary.index') }}" class="{{ set_active(['worshipSummary']) }}"> View Sermon Summary </a></li>
+    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
+        <li><a href="{{ route('worshipSummary.create') }}" class="{{ set_active(['worshipSummary/create']) }}">Add Sermon Summary</a></li>
         @if(isset($worshipSummaries) && $worshipSummaries->isNotEmpty()) <!-- Check if $worshipSummaries is not empty -->
-            <li><a href="{{ route('worshipSummary.edit', ['worshipSummary' => $worshipSummaries->first()->id]) }}" class="{{ request()->is('worshipSummary/*/edit') ? 'active' : '' }}">Edit Sermon Summary</a></li>
+        <li><a href="{{ route('worshipSummary.edit', ['worshipSummary' => $worshipSummaries->first()->id]) }}" class="{{ set_active(['worshipSummary/edit']) }} {{ request()->is('worshipSummary/*/edit') ? 'active' : '' }}">Edit Sermon Summary</a></li>
         @endif
     @endif
     </ul>

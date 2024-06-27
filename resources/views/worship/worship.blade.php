@@ -33,10 +33,12 @@
                         <div id="worship-details" class="mt-4">
                             <!-- Worship details will be displayed here -->
                         </div>
+                        @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
                         <div class="mt-4">
                             <button id="edit-worship" class="btn btn-primary" style="display: none;">Edit</button>
                             <button id="delete-worship" class="btn btn-danger" style="display: none;">Delete</button>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -48,8 +50,10 @@
     document.addEventListener('DOMContentLoaded', function () {
     const worshipDropdown = document.getElementById('worship-dropdown');
     const worshipDetails = document.getElementById('worship-details');
+    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
     const editButton = document.getElementById('edit-worship');
     const deleteButton = document.getElementById('delete-worship');
+    @endif
 
     worshipDropdown.addEventListener('change', function () {
         const worshipId = this.value;
@@ -83,25 +87,32 @@
                     detailsHtml += `</tbody></table>`;
                     worshipDetails.innerHTML = detailsHtml;
 
+                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
                     editButton.style.display = 'inline-block';
                     deleteButton.style.display = 'inline-block';
 
                     // Set data-id attribute for delete button
                     deleteButton.setAttribute('data-id', worshipId);
+                    @endif
                 })
                 .catch(error => {
                     console.error('Error fetching worship details:', error);
                     worshipDetails.innerHTML = `<p class="text-danger">Error fetching worship details.</p>`;
+                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
                     editButton.style.display = 'none';
                     deleteButton.style.display = 'none';
+                    @endif
                 });
         } else {
             worshipDetails.innerHTML = ''; // Clear details if no worship is selected
+            @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
             editButton.style.display = 'none';
             deleteButton.style.display = 'none';
+            @endif
         }
     });
 
+    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Leader')
     editButton.addEventListener('click', function () {
         const worshipId = worshipDropdown.value;
         if (worshipId) {
@@ -133,6 +144,7 @@
                 });
         }
     });
+    @endif
 });
 </script>
 @endsection

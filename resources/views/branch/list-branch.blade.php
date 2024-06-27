@@ -74,7 +74,9 @@
                                     <th>Established Since</th>
                                     <th>Website Link</th>
                                     <th>No of Members</th>
+                                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                                     <th class="text-end">Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                         </table>
@@ -167,10 +169,12 @@
                         data: 'no_of_members',
                         name: 'no_of_members',
                     },
+                    @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin')
                     {
                         data: 'modify',
                         name: 'modify',
                     },
+                    @endif
                 ]
             });
         });

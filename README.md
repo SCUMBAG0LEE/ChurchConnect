@@ -49,6 +49,172 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
 - **[Lendio](https://lendio.com)**
 
+## Installation Guide
+
+### Local Development Setup
+
+Follow these steps to set up and run the project locally:
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/SCUMBAG0LEE/ChurchConnect.git
+    cd your-repository
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    composer install
+    npm install
+    ```
+
+3. **Set up environment variables:**
+    - Copy the `.env.example` file to `.env`:
+      ```bash
+      copy .env.example .env
+      ```
+    - Update the `.env` file with your database configuration and other necessary settings:
+      ```dotenv
+      DB_CONNECTION=pgsql
+      DB_HOST=your-database-host
+      DB_PORT=5432
+      DB_DATABASE=ChurchConnect
+      DB_USERNAME=your-database-username
+      DB_PASSWORD=your-database-password
+      
+      MAIL_MAILER=smtp
+      MAIL_HOST=your-smtp-host
+      MAIL_PORT=your-smtp-port
+      MAIL_USERNAME=your-smtp-username
+      MAIL_PASSWORD=your-smtp-password
+      MAIL_ENCRYPTION=tls
+      MAIL_FROM_ADDRESS="${MAIL_USERNAME}"
+      MAIL_FROM_NAME="${APP_NAME}"
+      ```
+
+4. **Generate application key:**
+    ```bash
+    php artisan key:generate
+    ```
+
+5. **Run database migrations:**
+    ```bash
+    php artisan migrate
+    ```
+
+6. **Run the application:**
+    ```bash
+    php artisan serve
+    ```
+    - Your application will be accessible at `http://127.0.0.1:8000`.
+
+### Production Setup with Apache on Windows
+
+Follow these steps to set up and deploy the project on an Apache server:
+
+1. **Clone the repository to your server:**
+    ```bash
+    git clone https://github.com/SCUMBAG0LEE/ChurchConnect.git
+    cd your-repository
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    composer install --optimize-autoloader --no-dev
+    npm install --production
+    ```
+
+3. **Set up environment variables:**
+    - Copy the `.env.example` file to `.env`:
+      ```bash
+      copy .env.example .env
+      ```
+    - Update the `.env` file with your database configuration and other necessary settings:
+      ```dotenv
+      DB_CONNECTION=pgsql
+      DB_HOST=your-database-host
+      DB_PORT=5432
+      DB_DATABASE=ChurchConnect
+      DB_USERNAME=your-database-username
+      DB_PASSWORD=your-database-password
+      
+      MAIL_MAILER=smtp
+      MAIL_HOST=your-smtp-host
+      MAIL_PORT=your-smtp-port
+      MAIL_USERNAME=your-smtp-username
+      MAIL_PASSWORD=your-smtp-password
+      MAIL_ENCRYPTION=tls
+      MAIL_FROM_ADDRESS="${MAIL_USERNAME}"
+      MAIL_FROM_NAME="${APP_NAME}"
+      ```
+
+4. **Generate application key:**
+    ```bash
+    php artisan key:generate
+    ```
+
+5. **Run database migrations:**
+    ```bash
+    php artisan migrate --force
+    ```
+
+6. **Set permissions:**
+    ```bash
+    icacls "C:\path-to-your-project\storage" /grant IIS_IUSRS:F /T
+    icacls "C:\path-to-your-project\bootstrap\cache" /grant IIS_IUSRS:F /T
+    ```
+
+7. **Configure Apache:**
+    - Open the Apache configuration file (`httpd.conf`) and add the following virtual host configuration:
+      ```apache
+      <VirtualHost *:80>
+          ServerName your-domain.com
+          DocumentRoot "C:/path-to-your-project/public"
+
+          <Directory "C:/path-to-your-project/public">
+              AllowOverride All
+              Require all granted
+          </Directory>
+
+          ErrorLog "logs/your-project-error.log"
+          CustomLog "logs/your-project-access.log" common
+      </VirtualHost>
+      ```
+    - Restart Apache to apply the changes:
+      ```bash
+      httpd -k restart
+      ```
+
+8. **Run the application:**
+    - Your application should now be accessible at `http://your-domain.com`.
+
+## Contact Feature
+
+To set up the contact feature, add the following route in your `web.php` file:
+
+```php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
+
+Route::post('send-mail', function (Request $request) {
+    $details = [
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'phone' => $request->input('phone'),
+        'message' => $request->input('message'),
+    ];
+
+    try {
+        Mail::to('user@example.com')->send(new SendMail($details));
+        return redirect()->back()->with('status', 'success')->with('message', 'Email sent successfully.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('status', 'error')->with('message', 'Failed to send email. Please try again later.');
+    }
+});
+
+Replace 'user@example.com' with your actual email address.
+```
+
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
