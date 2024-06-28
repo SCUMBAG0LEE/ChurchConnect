@@ -1,0 +1,10 @@
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (1, '2014_08_12_000000_create_users_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (2, '2014_10_12_100000_create_password_reset_tokens_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (3, '2019_08_19_000000_create_failed_jobs_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (5, '2022_08_03_061844_create_user_types_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (6, '2022_08_03_061918_create_role_type_users_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (7, '2023_02_26_224452_create_members_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (8, '2023_11_06_120643_create_branches_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (9, '2024_06_23_092559_create_worships_table', 1);
+INSERT INTO "migrations" ("id", "migration", "batch") VALUES (10, '2024_06_26_085827_create_worship_summaries_table', 1);

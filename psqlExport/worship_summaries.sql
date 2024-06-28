@@ -1,0 +1,1 @@
+INSERT INTO "worship_summaries" ("id", "worship_id", "speaker", "sermonTitle", "content", "bibleVerse", "created_at", "updated_at") VALUES (1, 1, 'Pdt. Chandra Hermawan', 'Ordinary Men', 'https://www.gbiprj.org/home/ringkasan-khotbah/search?page=1&ringkasan=ordinary-men-6426', '---', '2024-06-28 01:27:00', '2024-06-28 01:27:00');
