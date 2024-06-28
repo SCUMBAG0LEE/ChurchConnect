@@ -6,3 +6,5 @@ password : admin123
 2. Worker :
 email : worker@email.com
 password : worker123
+
+GUnakan php artisan storage:link untuk upload dan render profile image.
