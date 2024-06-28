@@ -1,0 +1,8 @@
+Akun Postgre:
+1. Admin : 
+email : admin@email.com
+password : admin123
+
+2. Worker :
+email : worker@email.com
+password : worker123
