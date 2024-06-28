@@ -13,6 +13,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File; // Add this line
 use App\Rules\MatchOldPassword;
 
 
@@ -87,34 +88,48 @@ class UserManagementController extends Controller
     }
 
     /** user delete */
-    public function userDelete(Request $request)
-    {
-        DB::beginTransaction();
-        try {
-            if (Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Admin')
-            {
-                if ($request->avatar == 'photo_defaults.jpg')
-                {
-                    User::destroy($request->user_id);
-                } else {
-                    User::destroy($request->user_id);
-                    unlink('images/'.$request->avatar);
-                }
-            } else {
-                Toastr::error('User deleted fail :)','Error');
-            }
+     /** user delete */
+     public function userDelete(Request $request)
+     {
+         DB::beginTransaction();
+         try {
+             if (Session::get('role_name') === 'Super Admin' || Session::get('role_name') === 'Admin') {
+                 Log::info('Attempting to delete user with user_id: ' . $request->user_id);
+                 
+                 $user = User::where('user_id', $request->user_id)->first();
+ 
+                 if ($user) {
+                     $avatar = $user->avatar;
+ 
+                     if ($avatar && $avatar !== 'photo_defaults.jpg') {
+                         if (File::exists(public_path('images/' . $avatar))) {
+                             File::delete(public_path('images/' . $avatar));
+                         }
+                     }
+ 
+                     $user->delete();
+                     DB::commit();
+                     Toastr::success('User deleted successfully :)', 'Success');
+                 } else {
+                     DB::rollBack();
+                     Toastr::error('User not found', 'Error');
+                 }
+             } else {
+                 DB::rollBack();
+                 Toastr::error('Unauthorized action', 'Error');
+             }
+ 
+             return redirect()->back();
+         } catch (\Exception $e) {
+             Log::error('User deletion failed: ' . $e->getMessage());
+             DB::rollBack();
+             Toastr::error('User deletion failed :)', 'Error');
+             return redirect()->back();
+         }
+     }
+ 
 
-            DB::commit();
-            Toastr::success('User deleted successfully :)','Success');
-            return redirect()->back();
-    
-        } catch(\Exception $e) {
-            Log::info($e);
-            DB::rollback();
-            Toastr::error('User deleted fail :)','Error');
-            return redirect()->back();
-        }
-    }
+
 
     /** change password */
     public function changePassword(Request $request)
