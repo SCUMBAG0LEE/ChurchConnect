@@ -115,4 +115,44 @@
             </div>
         </div>
     </div>
+
+    {{-- Modal delete --}}
+    <div class="modal custom-modal fade" id="delete" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-header">
+                        <h3>Delete User</h3>
+                        <p>Are you sure want to delete?</p>
+                    </div>
+                    <div class="modal-btn delete-action">
+                        <div class="row">
+                            <form action="{{ route('user/delete') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="user_id" class="e_user_id" value="">
+                                <input type="hidden" name="avatar" class="e_avatar" value="">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary continue-btn">Delete</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-primary cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).on('click', '.delete', function () {
+            var userId = $(this).data('user_id');
+            var avatar = $(this).data('avatar');
+            $('.e_user_id').val(userId);
+            $('.e_avatar').val(avatar);
+        });
+    </script>
 @endsection
